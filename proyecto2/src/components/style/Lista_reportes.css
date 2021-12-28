@@ -1,0 +1,16 @@
+#lista_report{
+    align-items: center;
+    width: 60%;
+    margin-left:20%;
+    margin-top:5%;
+    background-color: rgba(30, 169, 53, 0.248);
+}
+#card-covid{
+    margin-left:39%;
+    margin-bottom: 8%;
+}
+
+a{
+    text-decoration:none;
+    color:black;
+}
