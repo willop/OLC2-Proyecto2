@@ -9,6 +9,7 @@ export class Consulta1 extends Component {
     constructor(props) {
         super(props);
         this.state ={
+            varpais:'',
             variable1: '', 
             variable2: '',
         }
@@ -26,6 +27,10 @@ export class Consulta1 extends Component {
 
 
     enviarDatos= async e => {
+        if(this.state.varpais==''){
+            console.log("vacio")
+            this.state.varpais='null';
+        }
         console.log(this.state);
         try {
             let configuracion = {
@@ -48,6 +53,8 @@ export class Consulta1 extends Component {
         return (
             <div id="ID_consulta">
                 <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Pais</Form.Label>
+                    <Form.Control name="varpais" type="text" placeholder="Ingrese el nombre del pais" value={this.state.varpais} onChange={this.handleInputChange} />
                     <Form.Label>Variable 1</Form.Label>
                     <Form.Control name="variable1" type="text" placeholder="Ingrese la primera variable" value={this.state.variable1} onChange={this.handleInputChange} />
                     <Form.Label>Variable 2</Form.Label>
