@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { FormGroup, Input } from 'reactstrap';
 import { Form,Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../components/style/Consulta1.css"
@@ -12,7 +11,6 @@ export class Consulta1 extends Component {
         this.state ={
             variable1: '', 
             variable2: '',
-            file: '',
         }
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -27,17 +25,28 @@ export class Consulta1 extends Component {
     }
 
 
-    enviarDatos(){
+    enviarDatos= async e => {
         console.log(this.state);
+        try {
+            let configuracion = {
+                method: 'POST',
+                headers: {
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify(this.state)
+            }
+            let respuesta = await fetch('http://localhost:4000/consulta1',configuracion)
+            let json = await respuesta.json();
+            console.log(json)
+        } catch (error) {
+            
+        }
     }
 
     render() {
         return (
             <div id="ID_consulta">
-                <FormGroup>
-                    <Input id="exampleFile" name="file" type="file" value={this.state.file} onChange={this.handleInputChange}/>
-                </FormGroup>
-
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Variable 1</Form.Label>
                     <Form.Control name="variable1" type="text" placeholder="Ingrese la primera variable" value={this.state.variable1} onChange={this.handleInputChange} />

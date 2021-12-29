@@ -15,7 +15,7 @@ export class Barra_nav extends Component {
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
                                 <Nav.Link href="/">Inicio</Nav.Link>
-                                <Nav.Link href="/about">Acerca de</Nav.Link>
+                                <Nav.Link href="/carga_masiva">Cargar archivo</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
