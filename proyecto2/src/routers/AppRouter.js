@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Barra_nav } from '../components/Barra_nav';
 import { Carga_archivo} from '../pages/Carga_archivo';
 import { Lista_reportes} from '../components/Lista_reportes';
-import { Consulta1 } from '../pages/Consulta1';
+import  Consulta1  from '../pages/Consulta1';
 
 export default function AppRouter() {
     return (
