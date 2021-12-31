@@ -3,18 +3,18 @@ import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../components/style/Consulta1.css";
 import logo from "./IMG/preview.png"
-import Reporte from "../components/Report/Reporte1"
+import Reporte from "../components/Report/Reporte10"
 import {jsPDF} from 'jspdf'
 
 
-const Consulta1 = (props) => {
+const Consulta10 = (props) => {
 
-    const [switchComp, setSwitch] = useState(false);
+    const [switchComp, setSwitch] = useState(0);
     const [imagenmostrar,setimg]=useState({
         img: logo,
         ecuacion: 'y= ax+b',
         val_r_cuadrado:'R^2',
-        pendiente:'m'
+        aproximaciones: '[1,2,3,4,5]',
     })
     
     
@@ -32,7 +32,7 @@ const Consulta1 = (props) => {
 
     const enviarDatos = async(event) =>{
         console.log("datos:"+datos.varcolpais+"\nContrasenia:"+datos.varpais)
-        setSwitch(true)
+        setSwitch(1)
         if (datos.varcolpais == '') {
             //console.log("vacio")
             datos.varcolpais = 'null';
@@ -48,7 +48,7 @@ const Consulta1 = (props) => {
                 },
                 body: JSON.stringify(datos)
             }
-            let respuesta = await fetch('http://localhost:4000/consulta1', configuracion)
+            let respuesta = await fetch('http://localhost:4000/consulta10', configuracion)
             let json = await respuesta.json();
             console.log('valor de la respuesta json')
             console.log(json)
@@ -61,14 +61,9 @@ const Consulta1 = (props) => {
             imagenmostrar.val_r_cuadrado = "R^2 = "+json.val_r
             console.log("valor del coeficiente en react")
             console.log(imagenmostrar.val_r_cuadrado)
-
-            console.log("valor de la pendiente en react")
-            var varpen = "pendiente = "+json.pendiente
-            //necesito analizar desde aca la pendiente
-            //var varint = parseInt(json.pendiente)
-            //console.log(varint)
-            varpen >= 0.7 ?  imagenmostrar.pendiente='Se puede observar que el modelo cuenta con una tendencia negativa,\ncon una presicion del modelo de'+ json.pendiente+',\nesto quiere decir que a medida que el valor de X aumenta, el valor\nde y disminuye. Por tanto se puede conluir que la la infeccion de\nCOVID-19 disminuira con el paso del tiempo.' : imagenmostrar.pendiente='Se puede observar que el modelo cuenta con una tendencia positiva,\nesto quiere decir que a medida que el valor de X aumenta, el valor\nde y tambien aumenta. Por tanto se puede conluir que la la infeccion\nde COVID-19 aumentara con el paso del tiempo.'
-            //console.log(imagenmostrar.pendiente)
+            setimg({...imagenmostrar,aproximaciones : json.aproximaciones})
+            console.log("valor de las aproximaciones en react")
+            console.log(imagenmostrar.aproximaciones)
         } catch (error) {
 
         }
@@ -91,23 +86,24 @@ const Consulta1 = (props) => {
         doc.text(100,660,'Coeficiente de determinacion(R^2):')
         doc.setTextColor(0,0,255)
         doc.text(150,680,imagenmostrar.val_r_cuadrado)
-        doc.setTextColor(50,50,50)
         doc.setTextColor(0,0,0)
-        doc.text(100,700,'Conclusion de tendencia:')
+        doc.text(100,700,'5 Aproximaciones posteriores utilizando la ecuacion:')
         doc.setTextColor(0,0,255)
-        doc.text(80,720,imagenmostrar.pendiente)
+        doc.text(50,720,imagenmostrar.aproximaciones)
         doc.setTextColor(50,50,50)
         doc.setFont('Comic Sans','italic')
-        doc.setFontSize('13')
-        doc.text(355,810,'Autor: Wilfred Stewart Perez Solorzano\nCarnet:201408419')
+        doc.text(300,800,'Autor: Wilfred Stewart Perez Solorzano\nCarnet:201408419')
         doc.save('demo.pdf')
     }
 
     function Componente(){
-        if (switchComp) {
+        if (switchComp===1) {
             return (
                 <div>
-                    <Reporte contenido={imagenmostrar} />                  
+                    <Reporte contenido={imagenmostrar} />
+                    <div id="ID_div_boton">
+                <Button variant="success" id="descargar" onClick={descargar} >Descargar reporte</Button>
+            </div>
                 </div>
                 
             )
@@ -124,15 +120,10 @@ const Consulta1 = (props) => {
         }
     }
 
-    function verpreview(){
-        setSwitch(!switchComp)
-    }
-
 
     return (
         <div id="ID_general">
             <div id="ID_consulta">
-                <center><h2>Tendencia de la infección por Covid-19 en un País.</h2></center>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Ingrese la columna del pais</Form.Label>
                     <Form.Control name="varcolpais" type="text" placeholder="Ingrese la columna del pais"  onChange={handleuserchange}/>
@@ -143,19 +134,15 @@ const Consulta1 = (props) => {
                     <Form.Label>Ingrese la columna de casos confirmados</Form.Label>
                     <Form.Control name="variable2" type="text" placeholder="Ingrese la columna de casos confirmados" onChange={handleuserchange} />
                 </Form.Group>
-                <Button variant="danger" id="boton_enviar" onClick={enviarDatos}>Enviar</Button>
-            </div>           
-            <br/>
-                <Button variant="info" id="boton_enviar" onClick={verpreview}>* Preview *</Button> 
-                <Componente/>
+                <Button variant="outline-info" id="boton_enviar" onClick={enviarDatos}>Enviar</Button>
 
-                <div id="ID_div_boton">
-                <Button variant="success" id="descargar" onClick={descargar} >Descargar reporte</Button>
             </div>
+                
+                <Componente/>
             
         </div>//div global
     )
 
 }
 
-export default Consulta1
+export default Consulta10

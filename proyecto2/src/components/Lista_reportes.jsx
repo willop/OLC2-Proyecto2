@@ -24,31 +24,31 @@ export class Lista_reportes extends Component {
                         <a href="/consulta1" >Tendencia de la infección por Covid-19 en un País.</a>
                     </Button>
                     <Button variant="light" size="lg">
-                        <a href="/" >Predicción de Infertados en un País.</a>
+                        <a href="/consulta2" >Predicción de Infectados en un País.</a>
                     </Button>
                     <Button variant="light" size="lg">
-                        <a href="/" >Indice de Progresión de la pandemia.</a>
+                        <a href="/consulta3" >Indice de Progresión de la pandemia.</a>
                     </Button>
                     <Button variant="light" size="lg">
-                        <a href="/" >Predicción de mortalidad por COVID en un Departamento.</a>
+                        <a href="/consulta4" >Predicción de mortalidad por COVID en un Departamento.</a>
                     </Button>
                     <Button variant="light" size="lg">
-                        <a href="/" >Predicción de mortalidad por COVID en un País.</a>
+                        <a href="/consulta5" >Predicción de mortalidad por COVID en un País.</a>
                     </Button>
                     <Button variant="light" size="lg">
-                        <a href="/" >Análisis del número de muertes por coronavirus en un País.</a>
+                        <a href="/consulta6" >Análisis del número de muertes por coronavirus en un País.</a>
                     </Button>
                     <Button variant="light" size="lg">
-                        <a href="/" >Tendencia del número de infectados por día de un País.</a>
+                        <a href="/consulta7" >Tendencia del número de infectados por día de un País.</a>
                     </Button>
                     <Button variant="light" size="lg">
-                        <a href="/" >Predicción de casos de un país para un año.</a>
+                        <a href="/consulta8" >Predicción de casos de un país para un año.</a>
                     </Button>
                     <Button variant="light" size="lg">
-                        <a href="/" >Tendencia de la vacunación de en un País.</a>
+                        <a href="/consulta9" >Tendencia de la vacunación de en un País.</a>
                     </Button>
                     <Button variant="light" size="lg">
-                        <a href="/" >Ánalisis Comparativo de Vacunaciópn entre 2 paises.</a>
+                        <a href="/consulta10" >Ánalisis Comparativo de Vacunaciópn entre 2 paises.</a>
                     </Button>
                     <Button variant="light" size="lg">
                         <a href="/" >Porcentaje de hombres infectados por covid-19 en un País desde el primer caso activo</a>
