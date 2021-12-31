@@ -2,7 +2,8 @@
     width: 80%;
     margin-top:8%;
     margin-left: 10%;
-    background-color: yellow;
+    background-color: rgba(62, 189, 235, 0.604);
+    border-radius: 15px;
 }
 
 #exampleFile{
@@ -24,4 +25,11 @@
 
 #ID_div_boton{
     margin-left: 43%;
+}
+
+#id_prev_reporte{
+    width:80%;
+    background: rgb(8,145,172);
+    border-radius: 5px;
+background: linear-gradient(90deg, rgba(8,145,172,1) 0%, rgba(53,222,177,1) 50%, rgba(8,145,172,1) 100%);
 }

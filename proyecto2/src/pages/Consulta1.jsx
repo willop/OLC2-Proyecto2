@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "../components/style/Consulta1.css";
 import logo from "./IMG/preview.png"
 import Reporte from "../components/Reporte"
+import {jsPDF} from 'jspdf'
 
 
 const Consulta1 = (props) => {
@@ -11,9 +12,9 @@ const Consulta1 = (props) => {
     const [switchComp, setSwitch] = useState(0);
     const [imagenmostrar,setimg]=useState({
         img: logo,
-        ecuacion: '',
-        val_r_cuadrado:'',
-        aproximaciones: '',
+        ecuacion: 'y= ax+b',
+        val_r_cuadrado:'R^2',
+        aproximaciones: '[1,2,3,4,5]',
     })
     
     
@@ -38,8 +39,6 @@ const Consulta1 = (props) => {
         }
         console.log("datos a enviar")
         console.log(datos)
-        //console.log(JSON.stringify(envios))
-        //var url ='http://localhost:4000/consulta1'
         try {
             let configuracion = {
                 method: 'POST',
@@ -51,34 +50,74 @@ const Consulta1 = (props) => {
             }
             let respuesta = await fetch('http://localhost:4000/consulta1', configuracion)
             let json = await respuesta.json();
-            //console.log(json.img)
-            setimg({...imagenmostrar,img : "data:image/png;base64, "+json.img})
-            console.log("valor de la imagen en react")
-            console.log(imagenmostrar.img)
-            /*console.log(this.state2.imagenreporte)
-            this.state2.estado = json.ecuacion
-            console.log(this.state2.estado)
-            console.log(json.val_r)
-            console.log(json.aproximaciones)
-            //console.log(json)*/
+            console.log('valor de la respuesta json')
+            console.log(json)
+            imagenmostrar.img = "data:image/png;base64, "+json.img
+            //console.log("valor de la imagen en react")
+            //console.log(imagenmostrar.img)
+            imagenmostrar.ecuacion = json.ecuacion
+            console.log("valor de la ecuacion en react")
+            console.log(imagenmostrar.ecuacion)
+            imagenmostrar.val_r_cuadrado = "R^2 = "+json.val_r
+            console.log("valor del coeficiente en react")
+            console.log(imagenmostrar.val_r_cuadrado)
+            setimg({...imagenmostrar,aproximaciones : json.aproximaciones})
+            console.log("valor de las aproximaciones en react")
+            console.log(imagenmostrar.aproximaciones)
         } catch (error) {
 
         }
     }
 
+    function descargar(){
+        var doc = new jsPDF('p', 'pt');
+        doc.setFont('Comic Sans','italic')
+        doc.text(20, 20, 'Universidad San Calos de Guatemala\nFacultad de Ingenieria\nEscuela de Ciencias y Sistemas\nOLC2')
+  
+        doc.setFont('Arial', 'normal')
+        doc.text('Tendencia de la infección por Covid-19 en un País.',130,130 )
+        doc.text(20, 160, 'La subregión del Caribe y el Océano Atlántico sigue viendo una aceleración \nde los casos de COVID-19, y algunos países han declarado una quinta oleada \nde la pandemia en los últimos días. Entre los 36 países y territorios de la \nsubregión, al menos la mitad de ellos han experimentado un aumento del \n100% o más de casos durante los últimos 7 días en comparación con los \n7 días anteriores (rango: 100% - 879%).')      
+        doc.text(20, 300, 'Manual de aplicacion del modelo de regresion lineal para una tendencia de\ninfeccion de COVID-19:')
+        doc.addImage(imagenmostrar.img,'PNG',100,320,380,280)
+        doc.text(100,620,'Ecuacion del modelo de regresion lineal:')
+        doc.setTextColor(0,0,255)
+        doc.text(150,640,imagenmostrar.ecuacion)
+        doc.setTextColor(0,0,0)
+        doc.text(100,660,'Coeficiente de determinacion(R^2):')
+        doc.setTextColor(0,0,255)
+        doc.text(150,680,imagenmostrar.val_r_cuadrado)
+        doc.setTextColor(0,0,0)
+        doc.text(100,700,'5 Aproximaciones posteriores utilizando la ecuacion:')
+        doc.setTextColor(0,0,255)
+        doc.text(50,720,imagenmostrar.aproximaciones)
+        doc.setTextColor(50,50,50)
+        doc.setFont('Comic Sans','italic')
+        doc.text(300,800,'Autor: Wilfred Stewart Perez Solorzano\nCarnet:201408419')
+        doc.save('demo.pdf')
+    }
+
     function Componente(){
-        //if (switchComp===1) {
+        if (switchComp===1) {
             return (
                 <div>
                     <Reporte contenido={imagenmostrar} />
+                    <div id="ID_div_boton">
+                <Button variant="success" id="descargar" onClick={descargar} >Descargar reporte</Button>
+            </div>
                 </div>
                 
             )
-       // }else{
-        //    return(
-        //        <h1>Reporte</h1>
-        //    )
-        //}
+        }else{
+            return(
+                <div >
+                    <br/>
+                    <br/>
+                    <br/><center>
+                    <h1 id="id_prev_reporte">Reporte</h1>
+                    </center>
+                </div>
+            )
+        }
     }
 
 
@@ -98,10 +137,9 @@ const Consulta1 = (props) => {
                 <Button variant="outline-info" id="boton_enviar" onClick={enviarDatos}>Enviar</Button>
 
             </div>
+                
                 <Componente/>
-            <div id="ID_div_boton">
-                <Button variant="success" id="descargar" >Descargar reporte</Button>
-            </div>
+            
         </div>//div global
     )
 
