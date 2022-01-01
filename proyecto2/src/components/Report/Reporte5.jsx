@@ -10,7 +10,7 @@ const Reporte5=({contenido}) => {
                 </div>
                 <div id="ID_reporte_contenido">
                     <center>
-                    <h2>Prediccion de infectados en un País.</h2>
+                    <h2>Predicción de mortalidad por COVID en un País.</h2>
                     <p>
                     La subregión del Caribe y el Océano Atlántico sigue viendo una aceleración de los casos de COVID-19, y algunos países han declarado una quinta oleada de la pandemia en los últimos días. Entre los 36 países y territorios de la subregión, al menos la mitad de ellos han experimentado un aumento del 100% o más de casos durante los últimos 7 días en comparación con los 7 días anteriores (rango: 100% - 879%).
                     </p>

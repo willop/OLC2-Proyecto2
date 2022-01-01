@@ -4,24 +4,24 @@ const Reporte1=({contenido}) => {
     return(
         <div id="ID_reporte" >
                 <div id="ID_imagen_reporte">
-                    <center><h1>GRAFICA DE TENDENCIA</h1></center>
+                    <center><h1>GRAFICA DEL ANALISIS</h1></center>
                     
                     <center><img src={contenido.img}/></center>
                 </div>
                 <div id="ID_reporte_contenido">
                     <center>
-                    <h2>Tendencia de la infección por Covid-19 en un País</h2>
+                    <h2>Análisis del número de muertes por coronavirus en un País.</h2>
                     <p>
-                    La subregión del Caribe y el Océano Atlántico sigue viendo una aceleración de los casos de COVID-19, y algunos países han declarado una quinta oleada de la pandemia en los últimos días. Entre los 36 países y territorios de la subregión, al menos la mitad de ellos han experimentado un aumento del 100% o más de casos durante los últimos 7 días en comparación con los 7 días anteriores (rango: 100% - 879%).
+                    La covid-19, la enfermedad provocada por el nuevo coronavirus, fue reportada por primera vez a fines de 2019 en China.<br/>A mediados de enero de 2021 se pasó la marca de los dos millones de fallecidos a nivel mundial, según el conteo de la Universidad Johns Hopkins, y ya se superó los 100 millones de casos confirmados.
                     </p>
                     <br/>
                     <p>
-                       Ecuacion del modelo de regresion lineal:<br/>
+                       Ecuacion polinomial de grado 2:<br/>
                        {contenido.ecuacion}<br/>
-                       Coeficiente de determinacion(R^2):<br/>
-                       {contenido.val_r_cuadrado}<br/>
-                       5 Aproximaciones posteriores utilizando la ecuacion:<br/>
-                       {contenido.aproximaciones}<br/>
+                       Cantidad de muertes en este Pais:<br/>
+                       {contenido.cantidadmuertes}<br/>
+                       conclusion:<br/>
+                       {contenido.conclusion}<br/>
                        <br/>
                        <br/>
                        Autor: Wilfred Stewart Perez Solorzano<br/>Carnet:201408419

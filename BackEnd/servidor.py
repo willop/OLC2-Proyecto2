@@ -102,7 +102,7 @@ def consulta1():
         print("error")
         print(pr.score(x_train_poli,y_train_p))
         plt.scatter(x,y,color='blue')
-        plt.plot(x,y, color='black',linewidth=3)
+        plt.plot(x,y, color='red',linewidth=2)
         plt.title('Tendecia por Covid-19 en un pais')
         plt.xlabel(var1)
         plt.ylabel(var2)
@@ -136,7 +136,7 @@ def consulta1():
 
         y_pred_pr =pr.predict(x_test_poli)
         plt.scatter(x,y,color='blue')
-        plt.plot(x,y, color='black',linewidth=3)
+        plt.plot(x,y, color='red',linewidth=2)
         plt.title('Tendecia por Covid-19 en '+str(varpais))
         plt.xlabel(var1)
         plt.ylabel(var2)
@@ -294,7 +294,6 @@ def consulta2():
     return jsonify({"img": imagenbase64,"mse":str(ecuacion),"val_r_cuadrado":str(r_cuadrado)})
 
 
-
 @app.route('/consulta3', methods=['POST'])
 def consulta3():
     print("Hola mundo\n\n\n")
@@ -400,9 +399,6 @@ def consulta3():
         plt.close()
 
     return jsonify({"img": imagenbase64,"ecuacion":ecuacion,"indice":str(m)})
-
-
-
 
 
 @app.route('/consulta4', methods=['POST'])
@@ -542,7 +538,6 @@ def consulta4():
     return jsonify({"img": imagenbase64,"mse":str(ecuacion),"val_r_cuadrado":str(r_cuadrado)})
 
 
-
 @app.route('/consulta5', methods=['POST'])
 def consulta5():
     print("Hola mundo\n\n\n")
@@ -678,6 +673,127 @@ def consulta5():
     print("El valor de la ecuacion es: "+str(ecuacion))
     return jsonify({"img": imagenbase64,"mse":str(ecuacion),"val_r_cuadrado":str(r_cuadrado)})
 
+@app.route('/consulta6', methods=['POST'])
+def consulta6():
+    print("Hola mundo\n\n\n")
+    datos=""
+    datos = request.get_data()
+    print(datos)
+    datos=datos.decode('utf-8')
+    datos = json.loads(datos)
+    print(datos)
+
+    variables = {
+        "varcolpais":datos['varcolpais'],
+        "varpais":datos['varpais'],
+        "variable1": datos['variable1'],
+        "variable2": datos['variable2'],
+    }
+    global archivoglobal
+    varcolpais = variables['varcolpais']
+    varpais = variables['varpais']
+    var1 = variables['variable1']
+    var2 = variables['variable2']
+    mse=''
+    r_cuadrado = ''
+
+
+    if varpais == "null" or varcolpais == "null":
+        print('El archivo viene sin pais')
+        df = pd.DataFrame(archivoglobal)
+        x = df[var1]
+        y = df[var2]
+
+        intxx=np.arange(0,x.size,1)
+        #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
+        print(intxx)
+        intxx = intxx[:,np.newaxis]  
+
+        x_train_p,x_test_p,y_train_p,y_test_p = train_test_split(intxx,y)
+        x_train_df, x_test_df = pd.DataFrame(x_train_p), pd.DataFrame(x_test_p)
+
+        poli = PolynomialFeatures(degree = 2)
+        x_train_polinomio, x_test_polinomio = poli.fit_transform(x_train_df), poli.fit_transform(x_test_df)
+
+    	
+        pr = linear_model.LinearRegression().fit(x_train_polinomio,y_train_p)
+        coef = pr.coef_
+        print("coeficiente")
+        print(coef)
+        intercept = pr.intercept_
+        auxy = pr.predict(x_train_polinomio)
+        mse = np.sqrt(mean_squared_error(y_train_p,auxy))
+        r_cuadrado = r2_score(y_train_p,auxy)
+        print('r cuadrado')
+        print(r_cuadrado)
+
+
+        response = intercept + coef[1] * intxx+coef[2] * intxx**2  
+        valoraprox = response[response.size-1]
+        plt.scatter(intxx,y,color='blue')
+        plt.plot(intxx,response, color='green',linewidth=3)
+        plt.title('Analisis del número de muertes en un pais')
+        plt.xlabel(var1)
+        plt.ylabel(var2)
+        plt.savefig('./reporte.png')
+        with open("./reporte.png","rb") as img_file:
+            imagenbase64=base64.b64encode(img_file.read())
+            imagenbase64=imagenbase64.decode('utf-8')
+        #print(imagenbase64)
+        plt.close()
+
+             
+       
+
+    else:
+        print('Filtremos el pais')
+        newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
+        df = pd.DataFrame(newdata)
+        x = df[var1]
+        y = df[var2]
+        
+        intxx=np.arange(0,x.size,1)
+        #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
+        print(intxx)
+        intxx = intxx[:,np.newaxis]  
+
+        x_train_p,x_test_p,y_train_p,y_test_p = train_test_split(intxx,y)
+        x_train_df, x_test_df = pd.DataFrame(x_train_p), pd.DataFrame(x_test_p)
+
+        poli = PolynomialFeatures(degree = 2)
+        x_train_polinomio, x_test_polinomio = poli.fit_transform(x_train_df), poli.fit_transform(x_test_df)
+
+    	
+        pr = linear_model.LinearRegression().fit(x_train_polinomio,y_train_p)
+        coef = pr.coef_
+        print("coeficiente")
+        print(coef)
+        intercept = pr.intercept_
+        auxy = pr.predict(x_train_polinomio)
+        mse = np.sqrt(mean_squared_error(y_train_p,auxy))
+        r_cuadrado = r2_score(y_train_p,auxy)
+        print('r cuadrado')
+        print(r_cuadrado)
+
+
+        response = intercept + coef[1] * intxx+coef[2] * intxx**2  
+        valoraprox = response[response.size-1]
+        plt.scatter(intxx,y,color='blue')
+        plt.plot(intxx,response, color='green',linewidth=3)
+        plt.title('Analisis del número de muertes en ' +varpais)
+        plt.xlabel(var1)
+        plt.ylabel(var2)
+        plt.savefig('./reporte.png')
+        with open("./reporte.png","rb") as img_file:
+            imagenbase64=base64.b64encode(img_file.read())
+            imagenbase64=imagenbase64.decode('utf-8')
+        #print(imagenbase64)
+        plt.close()
+    
+    cantidadmuertes = str(response[response.size-1])
+    ecuacion = str(intercept)+'+'+ str(coef[1]) + '* x +'+ str(coef[2]) +'x^2'  
+    print("El valor de la ecuacion es: "+str(ecuacion))
+    return jsonify({"img": imagenbase64,"ecuacion":str(ecuacion),"cantidadmuertes":str(cantidadmuertes)})
 
 
 
