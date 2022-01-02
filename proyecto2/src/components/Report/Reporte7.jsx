@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Reporte1=({contenido}) => {
+const Reporte7=({contenido}) => {
     return(
         <div id="ID_reporte" >
                 <div id="ID_imagen_reporte">
-                    <center><h1>GRAFICA DE TENDENCIA</h1></center>
+                    <center><h1>GRAFICA DE TENDENCIA DIARIA</h1></center>
                     
                     <center><img src={contenido.img}/></center>
                 </div>
@@ -22,8 +22,15 @@ const Reporte1=({contenido}) => {
                        {contenido.val_r_cuadrado}<br/>
                        5 Aproximaciones posteriores utilizando la ecuacion:<br/>
                        {contenido.aproximaciones}<br/>
+                    </p>
+                    <div>
+                    <br/>
+                       <center><h1>Media de fectados diarios</h1><br/>
+                       <img src={contenido.img2}/></center>
                        <br/>
-                       <br/>
+                    </div>
+                        
+                    <p>   
                        Autor: Wilfred Stewart Perez Solorzano<br/>Carnet:201408419
                     </p>
                     </center>
@@ -32,4 +39,4 @@ const Reporte1=({contenido}) => {
     )
 }
 
-export default Reporte1;
+export default Reporte7;

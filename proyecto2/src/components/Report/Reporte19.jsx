@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Reporte8=({contenido}) => {
+const Reporte19=({contenido}) => {
     return(
         <div id="ID_reporte" >
                 <div id="ID_imagen_reporte">
-                    <center><h1>GRAFICA DE PREDICCION DE CASOS EN UN AÑO</h1></center>
+                    <center><h1>GRAFICA DE PREDICCION DE MUERTES EN UN AÑO</h1></center>
                     
                     <center><img src={contenido.img}/></center>
                 </div>
@@ -20,8 +20,8 @@ const Reporte8=({contenido}) => {
                        {contenido.mse}<br/>
                        Coeficiente de determinacion(R^2):<br/>
                        {contenido.val_r_cuadrado}<br/>
-                       Conclusion:<br/>
-                       {contenido.conclusion}<br/>
+                       Cantidad de muertes aproximadas son:<br/>
+                       {contenido.aprox}<br/>
                        <br/>
                        <br/>
                        Autor: Wilfred Stewart Perez Solorzano<br/>Carnet:201408419
@@ -32,6 +32,6 @@ const Reporte8=({contenido}) => {
     )
 }
 
-export default Reporte8;
+export default Reporte19;
 
 

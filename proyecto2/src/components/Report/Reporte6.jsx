@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Reporte1=({contenido}) => {
+const Reporte6=({contenido}) => {
     return(
         <div id="ID_reporte" >
                 <div id="ID_imagen_reporte">
@@ -32,4 +32,4 @@ const Reporte1=({contenido}) => {
     )
 }
 
-export default Reporte1;
+export default Reporte6;

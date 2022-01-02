@@ -17,7 +17,7 @@ const Reporte1=({contenido}) => {
                     </p>
                     <br/>
                     <p>
-                       Ecuacion del modelo de regresion lineal:<br/>
+                       Ecuacion del modelo de regresion polinomial de grado 2:<br/>
                        {contenido.ecuacion}<br/>
                        Coeficiente de determinacion(R^2):<br/>
                        {contenido.val_r_cuadrado}<br/>

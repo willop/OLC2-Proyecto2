@@ -12,6 +12,21 @@ import  Consulta7  from '../pages/Consulta7';
 import  Consulta8  from '../pages/Consulta8';
 import  Consulta9  from '../pages/Consulta9';
 import  Consulta10  from '../pages/Consulta10';
+import  Consulta11  from '../pages/Consulta11';
+import  Consulta12  from '../pages/Consulta12';
+import  Consulta13  from '../pages/Consulta13';
+import  Consulta14  from '../pages/Consulta14';
+import  Consulta15  from '../pages/Consulta15';
+import  Consulta16  from '../pages/Consulta16';
+import  Consulta17  from '../pages/Consulta17';
+import  Consulta18  from '../pages/Consulta18';
+import  Consulta19  from '../pages/Consulta19';
+import  Consulta20  from '../pages/Consulta20';
+import  Consulta21  from '../pages/Consulta21';
+import  Consulta22  from '../pages/Consulta22';
+import  Consulta23  from '../pages/Consulta23';
+import  Consulta24  from '../pages/Consulta24';
+import  Consulta25  from '../pages/Consulta25';
 
 export default function AppRouter() {
     return (
@@ -34,21 +49,21 @@ export default function AppRouter() {
                 <Route path="/consulta8" element={<Consulta8/>} > </Route>
                 <Route path="/consulta9" element={<Consulta9/>} > </Route>
                 <Route path="/consulta10" element={<Consulta10/>} > </Route>
-                <Route path="/consulta11" element={<h1>Hola mundo</h1>} > </Route>
-                <Route path="/consulta12" element={<h1>Hola mundo</h1>} > </Route>
-                <Route path="/consulta13" element={<h1>Hola mundo</h1>} > </Route>
-                <Route path="/consulta14" element={<h1>Hola mundo</h1>} > </Route>
-                <Route path="/consulta15" element={<h1>Hola mundo</h1>} > </Route>
-                <Route path="/consulta16" element={<h1>Hola mundo</h1>} > </Route>
-                <Route path="/consulta17" element={<h1>Hola mundo</h1>} > </Route>
-                <Route path="/consulta18" element={<h1>Hola mundo</h1>} > </Route>
-                <Route path="/consulta19" element={<h1>Hola mundo</h1>} > </Route>
-                <Route path="/consulta20" element={<h1>Hola mundo</h1>} > </Route>
-                <Route path="/consulta21" element={<h1>Hola mundo</h1>} > </Route>
-                <Route path="/consulta22" element={<h1>Hola mundo</h1>} > </Route>
-                <Route path="/consulta23" element={<h1>Hola mundo</h1>} > </Route>
-                <Route path="/consulta24" element={<h1>Hola mundo</h1>} > </Route>
-                <Route path="/consulta25" element={<h1>Hola mundo</h1>} > </Route>
+                <Route path="/consulta11" element={<Consulta11/>} > </Route>
+                <Route path="/consulta12" element={<Consulta12/>} > </Route>
+                <Route path="/consulta13" element={<Consulta13/>} > </Route>
+                <Route path="/consulta14" element={<Consulta14/>} > </Route>
+                <Route path="/consulta15" element={<Consulta15/>} > </Route>
+                <Route path="/consulta16" element={<Consulta16/>} > </Route>
+                <Route path="/consulta17" element={<Consulta17/>} > </Route>
+                <Route path="/consulta18" element={<Consulta18/>} > </Route>
+                <Route path="/consulta19" element={<Consulta19/>} > </Route>
+                <Route path="/consulta20" element={<Consulta20/>} > </Route>
+                <Route path="/consulta21" element={<Consulta21/>} > </Route>
+                <Route path="/consulta22" element={<Consulta22/>} > </Route>
+                <Route path="/consulta23" element={<Consulta23/>} > </Route>
+                <Route path="/consulta24" element={<Consulta24/>} > </Route>
+                <Route path="/consulta25" element={<Consulta25/>} > </Route>
             </Routes>
         </BrowserRouter>
     )

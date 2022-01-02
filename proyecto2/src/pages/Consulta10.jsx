@@ -3,36 +3,41 @@ import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../components/style/Consulta1.css";
 import logo from "./IMG/preview.png"
-import Reporte from "../components/Report/Reporte10"
+import Reporte10 from "../components/Report/Reporte10"
 import {jsPDF} from 'jspdf'
 
 
 const Consulta10 = (props) => {
 
-    const [switchComp, setSwitch] = useState(0);
+    const [switchComp, setSwitch] = useState(false);
     const [imagenmostrar,setimg]=useState({
         img: logo,
         ecuacion: 'y= ax+b',
-        val_r_cuadrado:'R^2',
-        aproximaciones: '[1,2,3,4,5]',
+        mse:'',
+        r_cuadrado:'',
+        ecuacion2: '',
+        mse2:'',
+        r_cuadrado2:'',        
     })
     
     
     const [datos, setDatos] = useState({
         varcolpais: '',
         varpais: '',
+        varpais2:'',
         variable1: '',
         variable2: '',
-        //local:'hola',
+        variable3: '',
+        variable4: '',
+
     })
     const handleuserchange = (event) =>{
         setDatos({...datos,[event.target.name]: event.target.value})
     }
 
-
     const enviarDatos = async(event) =>{
         console.log("datos:"+datos.varcolpais+"\nContrasenia:"+datos.varpais)
-        setSwitch(1)
+        setSwitch(true)
         if (datos.varcolpais == '') {
             //console.log("vacio")
             datos.varcolpais = 'null';
@@ -53,17 +58,28 @@ const Consulta10 = (props) => {
             console.log('valor de la respuesta json')
             console.log(json)
             imagenmostrar.img = "data:image/png;base64, "+json.img
-            //console.log("valor de la imagen en react")
-            //console.log(imagenmostrar.img)
+            
+            // esto es para la primera ecuacion
             imagenmostrar.ecuacion = json.ecuacion
-            console.log("valor de la ecuacion en react")
-            console.log(imagenmostrar.ecuacion)
-            imagenmostrar.val_r_cuadrado = "R^2 = "+json.val_r
-            console.log("valor del coeficiente en react")
-            console.log(imagenmostrar.val_r_cuadrado)
-            setimg({...imagenmostrar,aproximaciones : json.aproximaciones})
-            console.log("valor de las aproximaciones en react")
-            console.log(imagenmostrar.aproximaciones)
+            console.log("ecuacion: "+imagenmostrar.ecuacion)
+            var variable = json.mse
+            imagenmostrar.mse = parseFloat(variable).toFixed(4)
+            console.log(imagenmostrar.mse)
+            console.log("R al cuadrado")
+            variable = json.r_cuadrado
+            imagenmostrar.r_cuadrado = parseFloat(variable).toFixed(4)
+            
+            // esto es para la segunda ecuacion
+            imagenmostrar.ecuacion2 = json.ecuacion2
+            console.log("ecuacion: "+imagenmostrar.ecuacion2)
+            variable = json.mse2
+            imagenmostrar.mse2 = parseFloat(variable).toFixed(4)
+            console.log(imagenmostrar.mse2)
+            console.log("R al cuadrado2")
+            variable = json.r_cuadrado2
+            imagenmostrar.r_cuadrado2 = parseFloat(variable).toFixed(4)
+                           
+            //console.log(imagenmostrar.pendiente)
         } catch (error) {
 
         }
@@ -75,37 +91,50 @@ const Consulta10 = (props) => {
         doc.text(20, 20, 'Universidad San Calos de Guatemala\nFacultad de Ingenieria\nEscuela de Ciencias y Sistemas\nOLC2')
   
         doc.setFont('Arial', 'normal')
-        doc.text('Tendencia de la infección por Covid-19 en un País.',130,130 )
-        doc.text(20, 160, 'La subregión del Caribe y el Océano Atlántico sigue viendo una aceleración \nde los casos de COVID-19, y algunos países han declarado una quinta oleada \nde la pandemia en los últimos días. Entre los 36 países y territorios de la \nsubregión, al menos la mitad de ellos han experimentado un aumento del \n100% o más de casos durante los últimos 7 días en comparación con los \n7 días anteriores (rango: 100% - 879%).')      
-        doc.text(20, 300, 'Manual de aplicacion del modelo de regresion lineal para una tendencia de\ninfeccion de COVID-19:')
-        doc.addImage(imagenmostrar.img,'PNG',100,320,380,280)
-        doc.text(100,620,'Ecuacion del modelo de regresion lineal:')
+        doc.text('Ánalisis Comparativo de Vacunaciópn entre 2 paises.',130,130 )
+        doc.text(20, 160, 'Grafica de aplicacion del modelo de regresion polinomial para dos paises')
+        doc.addImage(imagenmostrar.img,'PNG',100,180,380,280)
+        doc.text(100,470,'Ecuacion polinomial de grado 2 para el primer pais:')
         doc.setTextColor(0,0,255)
-        doc.text(150,640,imagenmostrar.ecuacion)
+        doc.text(130,490,imagenmostrar.ecuacion)
         doc.setTextColor(0,0,0)
-        doc.text(100,660,'Coeficiente de determinacion(R^2):')
+        doc.text(100,510,'Error cuadratico medio para primer pais')
         doc.setTextColor(0,0,255)
-        doc.text(150,680,imagenmostrar.val_r_cuadrado)
+        doc.text(130,530,imagenmostrar.mse)
+        doc.setTextColor(50,50,50)
         doc.setTextColor(0,0,0)
-        doc.text(100,700,'5 Aproximaciones posteriores utilizando la ecuacion:')
+        doc.text(100,550,'Coeficiente de determinacion(R^2):')
         doc.setTextColor(0,0,255)
-        doc.text(50,720,imagenmostrar.aproximaciones)
+        doc.text(130,570,imagenmostrar.r_cuadrado)
+        doc.setTextColor(0,0,0)
+        doc.text(250,600,'Segundo Pais')
+        doc.text(100,620,'Ecuacion polinomial de grado 2 para el primer pais:')
+        doc.setTextColor(227,66,51)
+        doc.text(130,640,imagenmostrar.ecuacion)
+        doc.setTextColor(0,0,0)
+        doc.text(100,660,'Error cuadratico medio para primer pais')
+        doc.setTextColor(227,66,51)
+        doc.text(130,680,imagenmostrar.mse)
+        doc.setTextColor(50,50,50)
+        doc.setTextColor(0,0,0)
+        doc.text(100,700,'Coeficiente de determinacion(R^2):')
+        doc.setTextColor(227,66,51)
+        doc.text(130,720,imagenmostrar.r_cuadrado)
+
         doc.setTextColor(50,50,50)
         doc.setFont('Comic Sans','italic')
-        doc.text(300,800,'Autor: Wilfred Stewart Perez Solorzano\nCarnet:201408419')
-        doc.save('demo.pdf')
+        doc.setFontSize('13')        
+        doc.text(355,810,'Autor: Wilfred Stewart Perez Solorzano\nCarnet:201408419')
+        
+        doc.save('demo.pdf')        
     }
 
     function Componente(){
-        if (switchComp===1) {
+        if (switchComp) {
             return (
                 <div>
-                    <Reporte contenido={imagenmostrar} />
-                    <div id="ID_div_boton">
-                <Button variant="success" id="descargar" onClick={descargar} >Descargar reporte</Button>
-            </div>
-                </div>
-                
+                    <Reporte10 contenido={imagenmostrar} />                  
+                </div>            
             )
         }else{
             return(
@@ -120,29 +149,50 @@ const Consulta10 = (props) => {
         }
     }
 
+    function verpreview(){
+        setSwitch(!switchComp)
+    }
+
 
     return (
         <div id="ID_general">
             <div id="ID_consulta">
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Ingrese la columna del pais</Form.Label>
-                    <Form.Control name="varcolpais" type="text" placeholder="Ingrese la columna del pais"  onChange={handleuserchange}/>
-                    <Form.Label>Ingrese el nombre del Pais</Form.Label>
-                    <Form.Control name="varpais" type="text" placeholder="Ingrese el nombre del pais"  onChange={handleuserchange}/>
-                    <Form.Label>Ingrese la columna de fechas</Form.Label>
-                    <Form.Control name="variable1" type="text" placeholder="Ingrese la columna de fechas"  onChange={handleuserchange}/>
-                    <Form.Label>Ingrese la columna de casos confirmados</Form.Label>
-                    <Form.Control name="variable2" type="text" placeholder="Ingrese la columna de casos confirmados" onChange={handleuserchange} />
+            <center><h2>Ánalisis Comparativo de Vacunaciópn entre 2 paises..</h2><br/></center>        
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Ingrese la columna del Pais</Form.Label>
+                    <Form.Control name="varcolpais" type="text" placeholder="Ingrese la columna del primer Pais"  onChange={handleuserchange}/>
                 </Form.Group>
-                <Button variant="outline-info" id="boton_enviar" onClick={enviarDatos}>Enviar</Button>
-
-            </div>
+                <center><h2>Primer Pais</h2></center>
                 
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Ingrese el nombre del primer Pais</Form.Label>
+                    <Form.Control name="varpais" type="text" placeholder="Ingrese el nombre del primer Pais"  onChange={handleuserchange}/>
+                    <Form.Label>Ingrese la columna de fechas para el primer pais</Form.Label>
+                    <Form.Control name="variable1" type="text" placeholder="Ingrese la columna de fechas para el primer Pais"  onChange={handleuserchange}/>
+                    <Form.Label>Ingrese la columna de vacunacion del primer pais</Form.Label>
+                    <Form.Control name="variable2" type="text" placeholder="Ingrese la columna de vacunacion para el primer pais" onChange={handleuserchange} />
+                </Form.Group>
+                <br/>
+                <center><h2>Segundo Pais</h2></center>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Ingrese el nombre del segundo Pais</Form.Label>
+                    <Form.Control name="varpais2" type="text" placeholder="Ingrese el nombre del segundo Pais"  onChange={handleuserchange}/>
+                    <Form.Label>Ingrese la columna de fechas para el segundo pais</Form.Label>
+                    <Form.Control name="variable3" type="text" placeholder="Ingrese la columna de fechas para el segundo Pais"  onChange={handleuserchange}/>
+                    <Form.Label>Ingrese la columna de vacunacion del segundo pais</Form.Label>
+                    <Form.Control name="variable4" type="text" placeholder="Ingrese la columna de vacunacion para el segundo pais" onChange={handleuserchange} />
+                </Form.Group>
+                <Button variant="danger" id="boton_enviar" onClick={enviarDatos}>Enviar</Button>
+            </div>
+            <br/>
+                <Button variant="info" id="boton_enviar" onClick={verpreview}>* Preview *</Button> 
                 <Componente/>
-            
+
+                <div id="ID_div_boton">
+                <Button variant="success" id="descargar" onClick={descargar} >Descargar reporte</Button>
+            </div>
         </div>//div global
     )
-
 }
 
 export default Consulta10

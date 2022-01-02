@@ -4,18 +4,18 @@ import {ButtonGroup} from 'reactstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../components/style/Consulta1.css";
 import logo from "./IMG/preview.png"
-import Reporte8 from "../components/Report/Reporte8"
+import Reporte19 from "../components/Report/Reporte19"
 import { jsPDF } from 'jspdf'
 
 
-const Consulta8 = (props) => {
+const Consulta19 = (props) => {
 
     const [switchComp, setSwitch] = useState(false);
     const [imagenmostrar, setimg] = useState({
         img: logo,
         mse: 'y= ax+b',
         val_r_cuadrado: '',
-        conclusion: ''
+        aprox: ''
 
     })
 
@@ -49,7 +49,7 @@ const Consulta8 = (props) => {
                 },
                 body: JSON.stringify(datos)
             }
-            let respuesta = await fetch('http://localhost:4000/consulta8', configuracion)
+            let respuesta = await fetch('http://localhost:4000/consulta19', configuracion)
             let json = await respuesta.json();
             console.log('valor de la respuesta json')
             console.log(json)
@@ -64,7 +64,7 @@ const Consulta8 = (props) => {
             imagenmostrar.val_r_cuadrado = parseFloat(json.val_r_cuadrado).toFixed(3)
             console.log(imagenmostrar.val_r_cuadrado)
 
-            imagenmostrar.val_r_cuadrado < 0.7 ? imagenmostrar.conclusion = 'Con los valores obtenidos luego de realizar el analisis polinomial\nde la tendencia de infeccion por Covid-19, se obtubo un coeficiente\nde determinacion menor al 70%, esto indica que el modelo no explica\nla variabilidad de los datos en torno a su media.' : imagenmostrar.conclusion = 'Con los valores obtenidos luego de realizar el analisis polinomial\nde la tendencia de infeccion por Covid-19, se obtubo un coeficiente\nde determinacion mayor al 70%, esto indica que el modelo explica\ntoda la variabilidad de los datos en torno a su media.'
+            imagenmostrar.aprox = json.aprox
             //console.log(imagenmostrar.pendiente)
         } catch (error) {
 
@@ -83,16 +83,16 @@ const Consulta8 = (props) => {
         doc.addImage(imagenmostrar.img, 'PNG', 100, 320, 400, 280)
         doc.text(100, 620, 'Ecuacion polinomial de grado 2:')
         doc.setTextColor(0, 0, 255)
-        doc.text(60, 640, imagenmostrar.mse)
+        doc.text(150, 640, imagenmostrar.mse)
         doc.setTextColor(0, 0, 0)
         doc.text(100, 660, 'Coeficiente determinacion(R^2)')
         doc.setTextColor(0, 0, 255)
         doc.text(150, 680, imagenmostrar.val_r_cuadrado)
         doc.setTextColor(50, 50, 50)
         doc.setTextColor(0, 0, 0)
-        doc.text(100, 700, 'Conclusion de prediccion:')
+        doc.text(100, 700, 'Cantidad de muertes aproximadas utilizando la ecuacion son:')
         doc.setTextColor(0, 0, 255)
-        doc.text(80, 720, imagenmostrar.conclusion)
+        doc.text(150, 720, imagenmostrar.aprox)
         doc.setTextColor(50, 50, 50)
         doc.setFont('Comic Sans', 'italic')
         doc.setFontSize('13')
@@ -104,7 +104,7 @@ const Consulta8 = (props) => {
         if (switchComp) {
             return (
                 <div>
-                    <Reporte8 contenido={imagenmostrar} />
+                    <Reporte19 contenido={imagenmostrar} />
                 </div>
             )
         } else {
@@ -128,16 +128,16 @@ const Consulta8 = (props) => {
     return (
         <div id="ID_general">
             <div id="ID_consulta">
-                <center><h2>Predicción de casos de un país para un año.</h2></center>
+                <center><h2>Predicción de muertes en el último día del primer año de infecciones en un país..</h2></center>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Ingrese la columna del Pais</Form.Label>
                     <Form.Control name="varcolpais" type="text" placeholder="Ingrese la columna del Pais" onChange={handleuserchange} />
                     <Form.Label>Ingrese el nombre del Pais</Form.Label>
                     <Form.Control name="varpais" type="text" placeholder="Ingrese el nombre del Pais" onChange={handleuserchange} />
-                    <Form.Label>Ingrese la columna de fechas</Form.Label>
+                    <Form.Label>Ingrese la columna de Fechas</Form.Label>
                     <Form.Control name="variable1" type="text" placeholder="Ingrese la columna de fechas" onChange={handleuserchange} />
-                    <Form.Label>Ingrese la columna de Infectados</Form.Label>
-                    <Form.Control name="variable2" type="text" placeholder="Ingrese la columna de Infectados" onChange={handleuserchange} />
+                    <Form.Label>Ingrese la columna de Mortalidad</Form.Label>
+                    <Form.Control name="variable2" type="text" placeholder="Ingrese la columna de Mortalidad" onChange={handleuserchange} />
                 </Form.Group>
                 
                 <Button variant="danger" id="boton_enviar" onClick={enviarDatos}>Enviar</Button>
@@ -155,4 +155,4 @@ const Consulta8 = (props) => {
 
 }
 
-export default Consulta8
+export default Consulta19

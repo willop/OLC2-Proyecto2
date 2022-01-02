@@ -18,6 +18,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 import matplotlib.pyplot as plt
 import re
+from sklearn import preprocessing
+import seaborn as sns
 #%matplotlib inline
 
 
@@ -400,7 +402,6 @@ def consulta3():
 
     return jsonify({"img": imagenbase64,"ecuacion":ecuacion,"indice":str(m)})
 
-
 @app.route('/consulta4', methods=['POST'])
 def consulta4():
     print("Hola mundo\n\n\n")
@@ -775,7 +776,6 @@ def consulta6():
         print('r cuadrado')
         print(r_cuadrado)
 
-
         response = intercept + coef[1] * intxx+coef[2] * intxx**2  
         valoraprox = response[response.size-1]
         plt.scatter(intxx,y,color='blue')
@@ -794,6 +794,1019 @@ def consulta6():
     ecuacion = str(intercept)+'+'+ str(coef[1]) + '* x +'+ str(coef[2]) +'x^2'  
     print("El valor de la ecuacion es: "+str(ecuacion))
     return jsonify({"img": imagenbase64,"ecuacion":str(ecuacion),"cantidadmuertes":str(cantidadmuertes)})
+
+@app.route('/consulta7', methods=['POST'])
+def consulta7():
+    print("Hola mundo\n\n\n")
+    datos=""
+    datos = request.get_data()
+    print(datos)
+    datos=datos.decode('utf-8')
+    datos = json.loads(datos)
+    print(datos)
+
+    variables = {
+        "varcolpais":datos['varcolpais'],
+        "varpais":datos['varpais'],
+        "variable1": datos['variable1'],
+        "variable2": datos['variable2'],
+    }
+    global archivoglobal
+    varcolpais = variables['varcolpais']
+    varpais = variables['varpais']
+    var1 = variables['variable1']
+    var2 = variables['variable2']
+    mse=''
+    r_cuadrado = ''
+
+
+    if varpais == "null" or varcolpais == "null":
+        print('El archivo viene sin pais')
+        df = pd.DataFrame(archivoglobal)
+        x = df[var1]
+        y = df[var2]
+
+        intxx=np.arange(0,x.size,1)
+        #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
+        print(intxx)
+        intxx = intxx[:,np.newaxis]  
+
+        x_train_p,x_test_p,y_train_p,y_test_p = train_test_split(intxx,y)
+        x_train_df, x_test_df = pd.DataFrame(x_train_p), pd.DataFrame(x_test_p)
+
+        poli = PolynomialFeatures(degree = 2)
+        x_train_polinomio, x_test_polinomio = poli.fit_transform(x_train_df), poli.fit_transform(x_test_df)
+
+    	
+        pr = linear_model.LinearRegression().fit(x_train_polinomio,y_train_p)
+        coef = pr.coef_
+        print("coeficiente")
+        print(coef)
+        intercept = pr.intercept_
+        auxy = pr.predict(x_train_polinomio)
+        mse = np.sqrt(mean_squared_error(y_train_p,auxy))
+        r_cuadrado = r2_score(y_train_p,auxy)
+        print('r cuadrado')
+        print(r_cuadrado)
+
+
+        response = intercept + coef[1] * intxx+coef[2] * intxx**2  
+        valoraprox = response[response.size-1]
+        plt.scatter(intxx,y,color='blue')
+        plt.plot(intxx,response, color='green',linewidth=3)
+        plt.title('Analisis del número de muertes en un pais')
+        plt.xlabel(var1)
+        plt.ylabel(var2)
+        plt.savefig('./reporte.png')
+        with open("./reporte.png","rb") as img_file:
+            imagenbase64=base64.b64encode(img_file.read())
+            imagenbase64=imagenbase64.decode('utf-8')
+        #print(imagenbase64)
+        plt.close()
+      
+
+    else:
+        print('Filtremos el pais')
+        newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
+        df = pd.DataFrame(newdata)
+        x = df[var1]
+        y = df[var2]
+        
+        intxx=np.arange(0,x.size,1)
+        #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
+        print(intxx)
+        intxx = intxx[:,np.newaxis]  
+
+        x_train_p,x_test_p,y_train_p,y_test_p = train_test_split(intxx,y)
+        x_train_df, x_test_df = pd.DataFrame(x_train_p), pd.DataFrame(x_test_p)
+
+        poli = PolynomialFeatures(degree = 2)
+        x_train_polinomio, x_test_polinomio = poli.fit_transform(x_train_df), poli.fit_transform(x_test_df)
+
+    	
+        pr = linear_model.LinearRegression().fit(x_train_polinomio,y_train_p)
+        coef = pr.coef_
+        print("coeficiente")
+        print(coef)
+        intercept = pr.intercept_
+        auxy = pr.predict(x_train_polinomio)
+        mse = np.sqrt(mean_squared_error(y_train_p,auxy))
+        r_cuadrado = r2_score(y_train_p,auxy)
+        print('r cuadrado')
+        print(r_cuadrado)
+        
+        response = intercept + coef[1] * intxx+coef[2] * intxx**2  
+        valoraprox = response[response.size-1]
+        plt.scatter(intxx,y,color='blue')
+        plt.plot(intxx,response, color='green',linewidth=3)
+        plt.title('Analisis del número de muertes en ' +varpais)
+        plt.xlabel(var1)
+        plt.ylabel(var2)
+        plt.savefig('./reporte.png')
+        with open("./reporte.png","rb") as img_file:
+            imagenbase64=base64.b64encode(img_file.read())
+            imagenbase64=imagenbase64.decode('utf-8')
+        #print(imagenbase64)
+        plt.close()
+    
+
+    fig, axes = plt.subplots(nrows=1, ncols=1, figsize=(6, 6))
+    sns.distplot(
+    y,
+    hist    = False,
+    rug     = True,
+    color   = "blue",
+    kde_kws = {'shade': True, 'linewidth': 1},
+    ax      = axes
+    )
+    axes.set_title("Distribucion Media de infectados por dia", fontsize = 'medium')
+    axes.set_xlabel(var2, fontsize='small') 
+    axes.tick_params(labelsize = 6)
+    plt.savefig('./reporte.png')
+    with open("./reporte.png","rb") as img_file:
+        imagen2base64=base64.b64encode(img_file.read())
+        imagen2base64=imagen2base64.decode('utf-8')
+        #print(imagenbase64)
+    plt.close()
+    cantidadmuertes = str(response[response.size-1])
+    ecuacion = str(intercept)+'+'+ str(coef[1]) + '* x +'+ str(coef[2]) +'x^2'  
+    print("El valor de la ecuacion es: "+str(ecuacion))
+    return jsonify({"img": imagenbase64,"ecuacion":str(ecuacion),"cantidadmuertes":str(cantidadmuertes),"img2":imagen2base64})
+
+@app.route('/consulta8', methods=['POST'])
+def consulta8():
+    print("Hola mundo\n\n\n")
+    datos=""
+    datos = request.get_data()
+    print(datos)
+    datos=datos.decode('utf-8')
+    datos = json.loads(datos)
+    print(datos)
+
+    variables = {
+        "varcolpais":datos['varcolpais'],
+        "varpais":datos['varpais'],
+        "variable1": datos['variable1'],
+        "variable2": datos['variable2'],
+    }
+    global archivoglobal
+    varcolpais = variables['varcolpais']
+    varpais = variables['varpais']
+    var1 = variables['variable1']
+    var2 = variables['variable2']
+    
+    mse=''
+    r_cuadrado = ''
+
+    if varpais == "null" or varcolpais == "null":
+        print('El archivo viene sin pais')
+        df = pd.DataFrame(archivoglobal)
+        x = df[var1]
+        y = df[var2]
+        
+        varcant = x.size + 365
+
+        intxx=np.arange(0,x.size,1)
+        #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
+        print(intxx)
+        primerdato = intxx[0]
+        ultimo= intxx[intxx.size-1]
+        cantidadmas = ultimo + int(varcant)
+        print('Ultimo dato ='+ str(ultimo))
+        intxx = intxx[:,np.newaxis]  
+
+        x_train_p,x_test_p,y_train_p,y_test_p = train_test_split(intxx,y)
+        x_train_df, x_test_df = pd.DataFrame(x_train_p), pd.DataFrame(x_test_p)
+
+        poli = PolynomialFeatures(degree = 2)
+        x_train_polinomio, x_test_polinomio = poli.fit_transform(x_train_df), poli.fit_transform(x_test_df)
+    	
+        pr = linear_model.LinearRegression().fit(x_train_polinomio,y_train_p)
+        coef = pr.coef_
+        print("coeficiente")
+        print(coef)
+        intercept = pr.intercept_
+        auxy = pr.predict(x_train_polinomio)
+        mse = np.sqrt(mean_squared_error(y_train_p,auxy))
+        r_cuadrado = r2_score(y_train_p,auxy)
+        print('r cuadrado')
+        print(r_cuadrado)
+
+        nuevo_x = np.arange(primerdato,cantidadmas,1)  #ACA CREO MI NUEVO X                          #lo convierto
+        print(nuevo_x)
+        print("tamanio"+str(nuevo_x.size))
+
+        response = intercept + coef[1] * nuevo_x+coef[2] * nuevo_x**2  
+        valoraprox = response[response.size-1]
+        plt.scatter(intxx,y,color='blue')
+        plt.plot(nuevo_x,response, color='green',linewidth=3)
+        plt.title('Tendecia por Covid-19 en un pais\nLa prediccion del dia '+str(cantidadmas)+' = '+str(valoraprox))
+        plt.xlabel(var1)
+        plt.ylabel(var2)
+        plt.savefig('./reporte.png')
+        with open("./reporte.png","rb") as img_file:
+            imagenbase64=base64.b64encode(img_file.read())
+            imagenbase64=imagenbase64.decode('utf-8')
+        #print(imagenbase64)
+        plt.close()
+
+    else:
+        print('Filtremos el pais')
+        newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
+        df = pd.DataFrame(newdata)
+        x = df[var1]
+        y = df[var2]
+        
+        varcant = x.size + 365
+        intxx=np.arange(0,x.size,1)
+        #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
+        print(intxx)
+        primerdato = intxx[0]
+        ultimo= intxx[intxx.size-1]
+        cantidadmas = ultimo + int(varcant)
+        print('Ultimo dato ='+ str(ultimo))
+        intxx = intxx[:,np.newaxis]  
+
+        x_train_p,x_test_p,y_train_p,y_test_p = train_test_split(intxx,y)
+        x_train_df, x_test_df = pd.DataFrame(x_train_p), pd.DataFrame(x_test_p)
+
+        poli = PolynomialFeatures(degree = 2)
+        x_train_polinomio, x_test_polinomio = poli.fit_transform(x_train_df), poli.fit_transform(x_test_df)
+
+
+        pr = linear_model.LinearRegression().fit(x_train_polinomio,y_train_p)
+        coef = pr.coef_
+        print("coeficiente")
+        print(coef)
+        intercept = pr.intercept_
+        auxy = pr.predict(x_train_polinomio)
+        mse = np.sqrt(mean_squared_error(y_train_p,auxy))
+        r_cuadrado = r2_score(y_train_p,auxy)
+        print('r cuadrado')
+        print(r_cuadrado)
+
+        nuevo_x = np.arange(primerdato,cantidadmas,1)  #ACA CREO MI NUEVO X                          #lo convierto
+        print(nuevo_x)
+        print("tamanio"+str(nuevo_x.size))
+
+        response = intercept + coef[1] * nuevo_x+coef[2] * nuevo_x**2  
+        valoraprox = response[response.size-1]
+        plt.scatter(intxx,y,color='blue')
+        plt.plot(nuevo_x,response, color='green',linewidth=3)
+        plt.title('Tendecia por Covid-19 en '+varpais+'\nLa prediccion del dia '+str(cantidadmas)+' = '+str(round(valoraprox)))
+        plt.xlabel(var1)
+        plt.ylabel(var2)
+        plt.savefig('./reporte.png')
+        with open("./reporte.png","rb") as img_file:
+            imagenbase64=base64.b64encode(img_file.read())
+            imagenbase64=imagenbase64.decode('utf-8')
+        #print(imagenbase64)
+        plt.close()
+
+    ecuacion = str(intercept)+'+'+ str(coef[1]) + '* x +'+ str(coef[2]) +'x^2'  
+    print("El valor de la ecuacion es: "+str(ecuacion))
+    return jsonify({"img": imagenbase64,"mse":str(ecuacion),"val_r_cuadrado":str(r_cuadrado)})
+
+@app.route('/consulta9', methods=['POST'])
+def consulta9():
+    print("Hola mundo\n\n\n")
+    datos=""
+    datos = request.get_data()
+    print(datos)
+    datos=datos.decode('utf-8')
+    datos = json.loads(datos)
+    print(datos)
+
+    variables = {
+        "varcolpais":datos['varcolpais'],
+        "varpais":datos['varpais'],
+        "variable1": datos['variable1'],
+        "variable2": datos['variable2'],
+    }
+    global archivoglobal
+    varcolpais = variables['varcolpais']
+    varpais = variables['varpais']
+    var1 = variables['variable1']
+    var2 = variables['variable2']
+    mse=''
+    r_cuadrado = ''
+
+
+    if varpais == "null" or varcolpais == "null":
+        print('El archivo viene sin pais')
+        df = pd.DataFrame(archivoglobal)
+        x = df[var1]
+        y = df[var2]
+
+        intxx=np.arange(0,x.size,1)
+        #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
+        print(intxx)
+        intxx = intxx[:,np.newaxis]  
+
+        x_train_p,x_test_p,y_train_p,y_test_p = train_test_split(intxx,y)
+        x_train_df, x_test_df = pd.DataFrame(x_train_p), pd.DataFrame(x_test_p)
+
+        poli = PolynomialFeatures(degree = 2)
+        x_train_polinomio, x_test_polinomio = poli.fit_transform(x_train_df), poli.fit_transform(x_test_df)
+
+    	
+        pr = linear_model.LinearRegression().fit(x_train_polinomio,y_train_p)
+        coef = pr.coef_
+        print("coeficiente")
+        print(coef)
+        intercept = pr.intercept_
+        auxy = pr.predict(x_train_polinomio)
+        mse = np.sqrt(mean_squared_error(y_train_p,auxy))
+        r_cuadrado = r2_score(y_train_p,auxy)
+        print('r cuadrado')
+        print(r_cuadrado)
+
+
+        response = intercept + coef[1] * intxx+coef[2] * intxx**2  
+        valoraprox = response[response.size-1]
+        plt.scatter(intxx,y,color='blue')
+        plt.plot(intxx,response, color='green',linewidth=3)
+        plt.title('Analisis del número de infectados en un pais')
+        plt.xlabel(var1)
+        plt.ylabel(var2)
+        plt.savefig('./reporte.png')
+        with open("./reporte.png","rb") as img_file:
+            imagenbase64=base64.b64encode(img_file.read())
+            imagenbase64=imagenbase64.decode('utf-8')
+        #print(imagenbase64)
+        plt.close()
+      
+
+    else:
+        print('Filtremos el pais')
+        newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
+        df = pd.DataFrame(newdata)
+        x = df[var1]
+        y = df[var2]
+        
+        intxx=np.arange(0,x.size,1)
+        #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
+        print(intxx)
+        intxx = intxx[:,np.newaxis]  
+
+        x_train_p,x_test_p,y_train_p,y_test_p = train_test_split(intxx,y)
+        x_train_df, x_test_df = pd.DataFrame(x_train_p), pd.DataFrame(x_test_p)
+
+        poli = PolynomialFeatures(degree = 2)
+        x_train_polinomio, x_test_polinomio = poli.fit_transform(x_train_df), poli.fit_transform(x_test_df)
+
+    	
+        pr = linear_model.LinearRegression().fit(x_train_polinomio,y_train_p)
+        coef = pr.coef_
+        print("coeficiente")
+        print(coef)
+        intercept = pr.intercept_
+        auxy = pr.predict(x_train_polinomio)
+        mse = np.sqrt(mean_squared_error(y_train_p,auxy))
+        r_cuadrado = r2_score(y_train_p,auxy)
+        print('r cuadrado')
+        print(r_cuadrado)
+        
+        response = intercept + coef[1] * intxx+coef[2] * intxx**2  
+        valoraprox = response[response.size-1]
+        plt.scatter(intxx,y,color='blue')
+        plt.plot(intxx,response, color='green',linewidth=3)
+        plt.title('Analisis del número de muertes en ' +varpais)
+        plt.xlabel(var1)
+        plt.ylabel(var2)
+        plt.savefig('./reporte.png')
+        with open("./reporte.png","rb") as img_file:
+            imagenbase64=base64.b64encode(img_file.read())
+            imagenbase64=imagenbase64.decode('utf-8')
+        #print(imagenbase64)
+        plt.close()
+    
+    cantidadmuertes = str(response[response.size-1])
+    ecuacion = str(intercept)+'+'+ str(coef[1]) + '* x +'+ str(coef[2]) +'x^2'  
+    print("El valor de la ecuacion es: "+str(ecuacion))
+    return jsonify({"img": imagenbase64,"ecuacion":str(ecuacion),"mse":str(mse),"r_cuadrado":r_cuadrado})
+
+
+@app.route('/consulta10', methods=['POST'])
+def consulta10():
+    print("Hola mundo\n\n\n")
+    datos=""
+    datos = request.get_data()
+    print(datos)
+    datos=datos.decode('utf-8')
+    datos = json.loads(datos)
+    print(datos)
+
+    variables = {
+        "varcolpais":datos['varcolpais'],
+        "varpais":datos['varpais'],
+        "varpais2":datos['varpais2'],
+        "variable1": datos['variable1'],
+        "variable2": datos['variable2'],
+        "variable3": datos['variable3'],
+        "variable4": datos['variable4'],
+    }
+    global archivoglobal
+    varcolpais = variables['varcolpais']
+    varpais = variables['varpais']
+    varpais2 = variables['varpais2']
+    var1 = variables['variable1']
+    var2 = variables['variable2']
+    var3 = variables['variable3']
+    var4 = variables['variable4']
+
+    print(varcolpais)
+    print(varpais)
+    print(varpais2)
+    print(var1)
+    print(var2)
+    print(var3)
+    print(var4)
+
+    mse=''
+    mse2=''
+    r_cuadrado = ''
+    r_cuadrado2 = ''
+
+    #---------------------------------------------------------------
+    #---------------------- PARA EL PRIMER PAIS---------------------
+
+    archivoglobal2 = archivoglobal
+    print('Filtremos el pais')
+    newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
+    df = pd.DataFrame(newdata)
+    x = df[var1]
+    y = df[var2]
+    
+    intxx=np.arange(0,x.size,1)
+    #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
+    print(intxx)
+    intxx = intxx[:,np.newaxis]  
+
+    x_train_p,x_test_p,y_train_p,y_test_p = train_test_split(intxx,y)
+    x_train_df, x_test_df = pd.DataFrame(x_train_p), pd.DataFrame(x_test_p)
+
+    poli = PolynomialFeatures(degree = 2)
+    x_train_polinomio, x_test_polinomio = poli.fit_transform(x_train_df), poli.fit_transform(x_test_df)
+
+    
+    pr = linear_model.LinearRegression().fit(x_train_polinomio,y_train_p)
+    coef = pr.coef_
+    print("coeficiente")
+    print(coef)
+    intercept = pr.intercept_
+    auxy = pr.predict(x_train_polinomio)
+    mse = np.sqrt(mean_squared_error(y_train_p,auxy))
+    r_cuadrado = r2_score(y_train_p,auxy)
+    print('r cuadrado')
+    print(r_cuadrado)
+    
+    response = intercept + coef[1] * intxx+coef[2] * intxx**2  
+    valoraprox = response[response.size-1]
+    #plt.scatter(intxx,y,color='blue')
+    plt.plot(intxx,response, color='green',linewidth=3)
+    ecuacion = str(intercept)+'+'+ str(round(coef[1],2)) + '* x +'+ str(round(coef[2],2)) +'x^2'  
+    print("El valor de la ecuacion es: "+str(ecuacion))
+
+
+    #---------------------------------------------------------------
+    #---------------------- PARA EL SEGUNDO PAIS---------------------
+
+    print('Filtremos el pais')
+    print(archivoglobal2)
+    newdata2 = archivoglobal2.loc[archivoglobal2[varcolpais]==varpais2,:]
+    df2 = pd.DataFrame(newdata2)
+    x2 = df2[var3]
+    y2 = df2[var4]
+    
+    intxx2=np.arange(0,x2.size,1)
+    #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
+    print(intxx2)
+    intxx2 = intxx2[:,np.newaxis]  
+ 
+    x_train_p2,x_test_p2,y_train_p2,y_test_p2 = train_test_split(intxx2,y2)
+    x_train_df2, x_test_df2 = pd.DataFrame(x_train_p2), pd.DataFrame(x_test_p2)
+
+    poli = PolynomialFeatures(degree = 2)
+    x_train_polinomio2, x_test_polinomio2 = poli.fit_transform(x_train_df2), poli.fit_transform(x_test_df2)
+
+    pr = linear_model.LinearRegression().fit(x_train_polinomio2,y_train_p2)
+    coef = pr.coef_
+    print("coeficiente")
+    print(coef)
+    intercept = pr.intercept_
+    auxy2 = pr.predict(x_train_polinomio2)
+    mse2 = np.sqrt(mean_squared_error(y_train_p2,auxy2))
+    r_cuadrado2 = r2_score(y_train_p2,auxy2)
+    print('r cuadrado')
+    print(r_cuadrado2)
+    
+    response2 = intercept + coef[1] * intxx2+coef[2] * intxx2**2  
+    valoraprox = response2[response2.size-1]
+    #plt.scatter(intxx,y,color='blue')
+    plt.plot(intxx2,response2, color='red',linewidth=3)
+    plt.title('Ánalisis Comparativo de Vacunación entre ' +varpais+' y '+varpais2)
+    plt.xlabel(var1)
+    plt.ylabel(var2)
+    #plt.show()
+    plt.savefig('./reporte.png')
+    with open("./reporte.png","rb") as img_file:
+        imagenbase64=base64.b64encode(img_file.read())
+        imagenbase64=imagenbase64.decode('utf-8')
+    #print(imagenbase64)
+    plt.close()
+
+    #cantidadmuertes = str(response[response.size-1])
+    ecuacion2 = str(intercept)+'+'+ str(round(coef[1],2)) + '* x +'+ str(round(coef[2],2)) +'x^2'  
+    print("El valor de la ecuacion es: "+str(ecuacion2))
+    return jsonify({"img": imagenbase64,"ecuacion":str(ecuacion),"mse":str(mse),"r_cuadrado":r_cuadrado
+                    ,"ecuacion2":str(ecuacion),"mse2":str(mse2),"r_cuadrado2":r_cuadrado2})
+
+@app.route('/consulta11', methods=['POST'])
+def consulta11():
+    print("Hola mundo\n\n\n")
+    datos=""
+    datos = request.get_data()
+    print(datos)
+    datos=datos.decode('utf-8')
+    datos = json.loads(datos)
+    print(datos)
+
+    variables = {
+        "varcolpais":datos['varcolpais'],
+        "varpais":datos['varpais'],
+        "variable1": datos['variable1'],
+        "variable2": datos['variable2'],
+        "vargenero": datos['vargenero'],
+        "namegenero": datos['namegenero'],
+    }
+    global archivoglobal
+    varcolpais = variables['varcolpais']
+    varpais = variables['varpais']
+    var1 = variables['variable1']
+    var2 = variables['variable2']
+    var3 = variables['vargenero']
+    name = variables['namegenero']
+
+    if name == '':
+        name = "Hombre"
+    
+
+    print(varcolpais)
+    print(varpais)
+    print(var1)
+    print(var2)
+    print(var3)
+
+    print('Filtremos el pais')
+    newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
+    dff = pd.DataFrame(newdata)
+    auxx = dff[var1]
+    auxy = dff[var2]
+    
+    newdata2 = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
+    newdata2 = newdata2.loc[archivoglobal[var3]==name,:]
+
+    df = pd.DataFrame(newdata2)
+    x = df[var1]
+    y = df[var2]
+    varcant = 0
+
+    for a in y:
+        varcant += 1
+    
+    porcentaje = varcant / auxy.size
+
+    plt.scatter(auxx, auxy,color ='green')
+    plt.scatter(x,y,color='blue')
+    plt.title('Porcentaje de hombres infectados por covid-19 en ' +varpais+'\ndesde el primer caso activo.\nPoblacion general(Verde) vs. Hombres(Azul)')
+    plt.xlabel(var1)
+    plt.ylabel(var2)
+    plt.savefig('./reporte.png')
+    with open("./reporte.png","rb") as img_file:
+        imagenbase64=base64.b64encode(img_file.read())
+        imagenbase64=imagenbase64.decode('utf-8')
+    plt.close()
+
+    return jsonify({"img":imagenbase64,"porcentaje":str(round(porcentaje*100,2)),"total":str(auxy.size),'hombres':str(varcant)})
+
+@app.route('/consulta13', methods=['POST'])
+def consulta13():
+    print("Hola mundo\n\n\n")
+    datos=""
+    datos = request.get_data()
+    print(datos)
+    datos=datos.decode('utf-8')
+    datos = json.loads(datos)
+    print(datos)
+
+    variables = {
+        "varcolpais":datos['varcolpais'],
+        "varpais":datos['varpais'],
+        "variable1": datos['variable1'],
+        "variable2": datos['variable2'],
+        "variable3": datos['variable3'],
+    }
+    global archivoglobal
+    varcolpais = variables['varcolpais']
+    varpais = variables['varpais']
+    var1 = variables['variable1']
+    var2 = variables['variable2']
+    var3 = variables['variable3']
+    
+
+    print(varcolpais)
+    print(varpais)
+    print(var1)
+    print(var2)
+    print(var3)
+
+    print('Filtremos el pais')
+    newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
+    dff = pd.DataFrame(newdata)
+    auxx = dff[var2]
+    auxy = dff[var1]
+    x = dff[var3]
+ 
+
+    plt.scatter(auxx, auxy,color ='green')
+    plt.title('Casos confirmados vs Muertes promedio de ' +varpais)
+    plt.xlabel(var2)
+    plt.ylabel(var1)
+    plt.savefig('./reporte.png')
+    with open("./reporte.png","rb") as img_file:
+        imagenbase64=base64.b64encode(img_file.read())
+        imagenbase64=imagenbase64.decode('utf-8')
+    plt.close()
+
+
+    plt.scatter(x, auxy,color ='blue')
+    plt.title('edad vs Muertes promedio de ' +varpais)
+    plt.xlabel(var3)
+    plt.ylabel(var1)
+    plt.savefig('./reporte2.png')
+    with open("./reporte2.png","rb") as img_file:
+        imagen2base64=base64.b64encode(img_file.read())
+        imagen2base64=imagen2base64.decode('utf-8')
+    plt.close()
+
+    return jsonify({"img":imagenbase64,"img2":imagen2base64,"promedio":str(auxy.mean())})
+
+@app.route('/consulta14', methods=['POST'])
+def consulta14():
+    print("Hola mundo\n\n\n")
+    datos=""
+    datos = request.get_data()
+    print(datos)
+    datos=datos.decode('utf-8')
+    datos = json.loads(datos)
+    print(datos)
+
+    variables = {
+        "varcolpais":datos['varcolpais'],
+        "varpais":datos['varpais'],
+        "variable1": datos['variable1'],
+        "variable2": datos['variable2'],
+    }
+    global archivoglobal
+    varcolpais = variables['varcolpais']
+    varpais = variables['varpais']
+    var1 = variables['variable1']
+    var2 = variables['variable2']
+    
+    print('Filtremos el pais')
+    newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]    
+    df = pd.DataFrame(newdata)
+    dff = df.groupby([var1]).sum().reset_index()
+    
+    print(dff)
+    x = dff[var1]
+    y = dff[var2]
+
+    plt.scatter(x, y,color ='blue',linestyle="-", label="Muertes")
+    plt.title('Muertes segun la region de ' +varpais)
+    plt.xlabel(var1,fontdict = {'fontsize':3})
+    plt.ylabel(var2)
+    plt.savefig('./reporte.png')
+    with open("./reporte.png","rb") as img_file:
+        imagenbase64=base64.b64encode(img_file.read())
+        imagenbase64=imagenbase64.decode('utf-8')
+    plt.close()
+    return jsonify({"img":imagenbase64})
+
+@app.route('/consulta15', methods=['POST'])
+def consulta15():
+    print("Hola mundo\n\n\n")
+    datos=""
+    datos = request.get_data()
+    print(datos)
+    datos=datos.decode('utf-8')
+    datos = json.loads(datos)
+    print(datos)
+
+    variables = {
+        "varcolpais":datos['varcolpais'],
+        "varpais":datos['varpais'],
+        "varcoldep":datos['varcoldep'],
+        "vardep":datos['vardep'],
+        "variable1": datos['variable1'],
+        "variable2": datos['variable2'],
+    }
+    global archivoglobal
+    varcolpais = variables['varcolpais']
+    varpais = variables['varpais']
+    varcoldep = variables['varcoldep']
+    vardep = variables['vardep']
+    var1 = variables['variable1']
+    var2 = variables['variable2']
+    mse=''
+    r_cuadrado = ''
+
+    print('Filtremos el pais')
+    newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
+    newdata = newdata.loc[archivoglobal[varcoldep]==vardep,:]
+    df = pd.DataFrame(newdata)
+    x = df[var1]
+    y = df[var2]
+    
+    intxx=np.arange(0,x.size,1)
+    #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
+    print(intxx)
+    intxx = intxx[:,np.newaxis]  
+
+    x_train_p,x_test_p,y_train_p,y_test_p = train_test_split(intxx,y)
+    x_train_df, x_test_df = pd.DataFrame(x_train_p), pd.DataFrame(x_test_p)
+
+    poli = PolynomialFeatures(degree = 2)
+    x_train_polinomio, x_test_polinomio = poli.fit_transform(x_train_df), poli.fit_transform(x_test_df)
+
+    
+    pr = linear_model.LinearRegression().fit(x_train_polinomio,y_train_p)
+    coef = pr.coef_
+    print("coeficiente")
+    print(coef)
+    intercept = pr.intercept_
+    auxy = pr.predict(x_train_polinomio)
+    mse = np.sqrt(mean_squared_error(y_train_p,auxy))
+    r_cuadrado = r2_score(y_train_p,auxy)
+    print('r cuadrado')
+    print(r_cuadrado)
+    
+    response = intercept + coef[1] * intxx+coef[2] * intxx**2  
+    valoraprox = response[response.size-1]
+    plt.scatter(intxx,y,color='blue')
+    plt.plot(intxx,response, color='green',linewidth=3)
+    plt.title('Analisis del número de muertes en ' +varpais)
+    plt.xlabel(var1)
+    plt.ylabel(var2)
+    plt.savefig('./reporte.png')
+    with open("./reporte.png","rb") as img_file:
+        imagenbase64=base64.b64encode(img_file.read())
+        imagenbase64=imagenbase64.decode('utf-8')
+    #print(imagenbase64)
+    plt.close()
+    
+    cantidadmuertes = str(response[response.size-1])
+    ecuacion = str(intercept)+'+'+ str(round(coef[1],2)) + '* x +'+ str(round(coef[2],2)) +'x^2'  
+    print("El valor de la ecuacion es: "+str(ecuacion))
+    return jsonify({"img": imagenbase64,"ecuacion":str(ecuacion),"mse":str(mse),"r_cuadrado":r_cuadrado})
+
+@app.route('/consulta16', methods=['POST'])
+def consulta16():
+    print("Hola mundo\n\n\n")
+    datos=""
+    datos = request.get_data()
+    print(datos)
+    datos=datos.decode('utf-8')
+    datos = json.loads(datos)
+    print(datos)
+
+    variables = {
+        "varcolpais":datos['varcolpais'],
+        "varpais":datos['varpais'],
+        "variable1": datos['variable1'],
+        "variable2": datos['variable2'],
+        "vargenero": datos['vargenero'],
+        "namegenero": datos['namegenero'],
+    }
+    global archivoglobal
+    varcolpais = variables['varcolpais']
+    varpais = variables['varpais']
+    var1 = variables['variable1']
+    var2 = variables['variable2']
+    var3 = variables['vargenero']
+    name = variables['namegenero']
+
+    if name == '':
+        name = "Mujer"
+    
+
+    print(varcolpais)
+    print(varpais)
+    print(var1)
+    print(var2)
+    print(var3)
+
+    print('Filtremos el pais')
+    newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
+    dff = pd.DataFrame(newdata)
+    auxx = dff[var1]
+    auxy = dff[var2]
+    
+    newdata2 = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
+    newdata2 = newdata2.loc[archivoglobal[var3]==name,:]
+
+    df = pd.DataFrame(newdata2)
+    x = df[var1]
+    y = df[var2]
+    varcant = 0
+
+    for a in y:
+        varcant += 1
+    
+    porcentaje = varcant / auxy.size
+
+    plt.scatter(auxx, auxy,color ='green',label="Total" )
+    plt.scatter(x,y,color='pink',label="Mujeres")
+    plt.title('Porcentaje de mujeres infectados por covid-19 en ' +varpais+'\n frente al total de casos en un país, región o continente.')
+    plt.xlabel(var1)
+    plt.ylabel(var2)
+    plt.savefig('./reporte.png')
+    with open("./reporte.png","rb") as img_file:
+        imagenbase64=base64.b64encode(img_file.read())
+        imagenbase64=imagenbase64.decode('utf-8')
+    plt.close()
+
+    return jsonify({"img":imagenbase64,"porcentaje":str(round(porcentaje*100,2)),"total":str(auxy.size),'hombres':str(varcant)})
+
+@app.route('/consulta17', methods=['POST'])
+def consulta17():
+    print("Hola mundo\n\n\n")
+    datos=""
+    datos = request.get_data()
+    print(datos)
+    datos=datos.decode('utf-8')
+    datos = json.loads(datos)
+    print(datos)
+
+    variables = {
+        "varcolpais":datos['varcolpais'],
+        "varpais":datos['varpais'],
+        "variable1": datos['variable1'],
+        "variable2": datos['variable2'],
+        "variable3": datos['variable3'],
+    }
+    global archivoglobal
+    varcolpais = variables['varcolpais']
+    varpais = variables['varpais']
+    var1 = variables['variable1']
+    var2 = variables['variable2']
+    var3 = variables['variable3']
+    
+    print('Filtremos el continente')
+    newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]    
+    df = pd.DataFrame(newdata)
+
+    tablamuertes = df[var2]
+    tablainfectados = df[var3]
+
+    tablaresultado = tablamuertes/tablainfectados
+
+    x = df[var1]
+
+    plt.plot(x, tablaresultado,color ='blue',linestyle="-", label="Muertes")
+    plt.title('Tasa de comportamiento de casos activos en relacion al numero\nde muertes en el continente ' +varpais)
+    plt.xlabel(var1)
+    plt.ylabel('Tasa de comportamiento')
+    plt.savefig('./reporte.png')
+    with open("./reporte.png","rb") as img_file:
+        imagenbase64=base64.b64encode(img_file.read())
+        imagenbase64=imagenbase64.decode('utf-8')
+    plt.close()
+
+    tasa = str(round(tablaresultado.mean(),2))
+    return jsonify({"img":imagenbase64, "tasa":tasa})
+
+@app.route('/consulta18', methods=['POST'])
+def consulta18():
+    print("Hola mundo\n\n\n")
+    datos=""
+    datos = request.get_data()
+    print(datos)
+    datos=datos.decode('utf-8')
+    datos = json.loads(datos)
+    print(datos)
+
+    variables = {
+        "varcolpais":datos['varcolpais'],
+        "varpais":datos['varpais'],
+        "varcolmuni":datos['varcolmuni'],
+        "varmuni":datos['varmuni'],
+        "variable1": datos['variable1'],
+        "variable2": datos['variable2'],
+    }
+    global archivoglobal
+    varcolpais = variables['varcolpais']
+    varpais = variables['varpais']
+    varcolmuni = variables['varcolmuni']
+    varmuni = variables['varmuni']
+    var1 = variables['variable1']
+    var2 = variables['variable2']
+
+
+    print('Filtremos el pais')
+    newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
+    newdata = newdata.loc[archivoglobal[varcolmuni]==varmuni,:]
+    df = pd.DataFrame(newdata)
+    x = df[var1]
+    y = df[var2]
+    
+    print(df)
+    return jsonify({"img": imagenbase64})
+
+
+@app.route('/consulta19', methods=['POST'])
+def consulta19():
+    print("Hola mundo\n\n\n")
+    datos=""
+    datos = request.get_data()
+    print(datos)
+    datos=datos.decode('utf-8')
+    datos = json.loads(datos)
+    print(datos)
+
+    variables = {
+        "varcolpais":datos['varcolpais'],
+        "varpais":datos['varpais'],
+        "variable1": datos['variable1'],
+        "variable2": datos['variable2'],
+    }
+    global archivoglobal
+    varcolpais = variables['varcolpais']
+    varpais = variables['varpais']
+    var1 = variables['variable1']
+    var2 = variables['variable2']
+    
+    mse=''
+    r_cuadrado = ''    
+
+    print('Filtremos el pais')
+    newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
+    df = pd.DataFrame(newdata)
+    x = df[var1]
+    y = df[var2]
+    
+    varcant = x.size + 365
+    intxx=np.arange(0,x.size,1)
+    #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
+    print(intxx)
+    primerdato = intxx[0]
+    ultimo= intxx[intxx.size-1]
+    cantidadmas = ultimo + int(varcant)
+    print('Ultimo dato ='+ str(ultimo))
+    intxx = intxx[:,np.newaxis]  
+
+    x_train_p,x_test_p,y_train_p,y_test_p = train_test_split(intxx,y)
+    x_train_df, x_test_df = pd.DataFrame(x_train_p), pd.DataFrame(x_test_p)
+
+    poli = PolynomialFeatures(degree = 2)
+    x_train_polinomio, x_test_polinomio = poli.fit_transform(x_train_df), poli.fit_transform(x_test_df)
+
+
+    pr = linear_model.LinearRegression().fit(x_train_polinomio,y_train_p)
+    coef = pr.coef_
+    print("coeficiente")
+    print(coef)
+    intercept = pr.intercept_
+    auxy = pr.predict(x_train_polinomio)
+    mse = np.sqrt(mean_squared_error(y_train_p,auxy))
+    r_cuadrado = r2_score(y_train_p,auxy)
+    print('r cuadrado')
+    print(r_cuadrado)
+
+    nuevo_x = np.arange(primerdato,cantidadmas,1)  #ACA CREO MI NUEVO X                          #lo convierto
+    print(nuevo_x)
+    print("tamanio"+str(nuevo_x.size))
+
+    response = intercept + coef[1] * nuevo_x+coef[2] * nuevo_x**2  
+    valoraprox = response[response.size-1]
+
+    plt.scatter(intxx,y,color='blue')
+    plt.plot(nuevo_x,response, color='green',linewidth=3)
+    plt.title('Tendecia por Covid-19 en '+varpais+'\nLa prediccion del dia '+str(cantidadmas)+' = '+str(round(valoraprox)))
+    plt.xlabel(var1)
+    plt.ylabel(var2)
+    plt.savefig('./reporte.png')
+    with open("./reporte.png","rb") as img_file:
+        imagenbase64=base64.b64encode(img_file.read())
+        imagenbase64=imagenbase64.decode('utf-8')
+    #print(imagenbase64)
+    plt.close()
+
+    ecuacion = str(round(intercept,2))+'+'+ str(round(coef[1],2)) + '* x +'+ str(round(coef[2],2)) +'x^2'  
+    print("El valor de la ecuacion es: "+str(ecuacion))
+    return jsonify({"img": imagenbase64,"mse":str(ecuacion),"val_r_cuadrado":str(round(r_cuadrado,2)),"aprox":str(round(valoraprox))})
+    #return jsonify({"img": "hola"})
 
 
 
