@@ -37,9 +37,9 @@ export default function AppRouter() {
         <BrowserRouter>
         <Barra_nav/>
             <Routes>
-                <Route path="/" element={<Lista_reportes/>} > </Route>
-                <Route path="/carga_masiva" element={<Carga_archivo/>} > </Route>
-                <Route path="/consulta1" element={<Consulta1/>} > </Route>
+                <Route path="./" element={<Lista_reportes/>} > </Route>
+                <Route path="./carga_masiva" element={<Carga_archivo/>} > </Route>
+                <Route path="./consulta1" element={<Consulta1/>} > </Route>
                 <Route path="/consulta2" element={<Consulta2/>} > </Route>
                 <Route path="/consulta3" element={<Consulta3/>} > </Route>
                 <Route path="/consulta4" element={<Consulta4/>} > </Route>

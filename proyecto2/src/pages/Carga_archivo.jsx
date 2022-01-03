@@ -41,7 +41,7 @@ export class Carga_archivo extends Component {
                     <br/>
                     <br/>
                 <div id='ID_letrero'>
-                    <center><h1>Cargar archivo</h1></center>
+                    <center><h1>Cargar archivo (.csv,xlxs o xls)</h1></center>
                 </div>
                 <br/>
                 <br/>
