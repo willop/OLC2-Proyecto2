@@ -5,6 +5,7 @@ import "../components/style/Consulta1.css";
 import logo from "./IMG/preview.png"
 import Reporte20 from "../components/Report/Reporte20"
 import {jsPDF} from 'jspdf'
+import fiusac from "./IMG/logo+fiusac.png"
 
 
 const Consulta20 = (props) => {
@@ -76,6 +77,7 @@ const Consulta20 = (props) => {
         doc.text(20, 180, 'El estudio surgió de la avalancha de información relacionada con la COVID,\nla enfermedad causada por el coronavirus SARS-2, que apuntaba a que la edad se asociaba\na mayor mortalidad. Sin embargo, no había evidencia sólida para saber qué debía\nconsiderarse “edad avanzada” para esta enfermedad.\nAl mismo tiempo, se estaban comunicando gran cantidad de casos de fallecimientos en\ngente joven.')      
         doc.text(20, 310, 'Grafica de Tasa de comportamiento de casos activos en relación al número de\nmuertes en un continente de COVID-19:')
         doc.addImage(imagenmostrar.img,'PNG',50,360,500,340)
+        doc.addImage(fiusac,'PNG',470,10,75,75)
         doc.text(60,730,'Tasa de comportamiento de casos activos en relación al número de muertes\nen un continente.:')
         doc.setTextColor(255,0,25)
         doc.text(180,780,imagenmostrar.tasa)
@@ -85,6 +87,7 @@ const Consulta20 = (props) => {
         doc.text(355,810,'Autor: Wilfred Stewart Perez Solorzano\nCarnet:201408419')
         
         doc.addPage()
+        doc.addImage(fiusac,'PNG',470,10,75,75)
         doc.setFont('Arial', 'normal')
         doc.setFontSize('18')
         doc.text(20, 50, 'Grafica de Tasa de comportamiento de casos activos en relación al número de\nmuertes en un continente de COVID-19:')

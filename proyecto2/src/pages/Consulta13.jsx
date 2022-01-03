@@ -5,6 +5,7 @@ import "../components/style/Consulta1.css";
 import logo from "./IMG/preview.png"
 import Reporte13 from "../components/Report/Reporte13"
 import {jsPDF} from 'jspdf'
+import fiusac from "./IMG/logo+fiusac.png"
 
 
 const Consulta13 = (props) => {
@@ -73,6 +74,7 @@ const Consulta13 = (props) => {
         doc.text(20, 160, 'La covid-19, la enfermedad provocada por el nuevo coronavirus, fue reportada\npor primera vez a fines de 2019 en China. A mediados de enero de 2021\nse pasó la marca de los dos millones de fallecidos a nivel mundial, según el conteo\nde la Universidad Johns Hopkins, y ya se superó los 100 millones de casos confirmados.')      
         doc.text(200, 270, 'Grafica de muertes vs infectados')
         doc.addImage(imagenmostrar.img,'PNG',80,290,450,330)
+        doc.addImage(fiusac,'PNG',470,10,75,75)
         doc.setTextColor(50,50,50)
         doc.setFont('Comic Sans','italic')
         doc.setFontSize('13')
@@ -82,6 +84,7 @@ const Consulta13 = (props) => {
         doc.setFont('Arial', 'normal')
         doc.text(200,40,'Grafica de muertes vs edad:')
         doc.addImage(imagenmostrar.img2,'PNG',80,60,450,330)
+        doc.addImage(fiusac,'PNG',470,10,75,75)
         doc.setTextColor(0,0,0)
         doc.text(250,420,'Muertes promedio')
         doc.setTextColor(255,0,10)

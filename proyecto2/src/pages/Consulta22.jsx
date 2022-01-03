@@ -5,6 +5,7 @@ import "../components/style/Consulta1.css";
 import logo from "./IMG/preview.png"
 import Reporte22 from "../components/Report/Reporte22"
 import {jsPDF} from 'jspdf'
+import fiusac from "./IMG/logo+fiusac.png"
 
 
 const Consulta22 = (props) => {
@@ -74,6 +75,7 @@ const Consulta22 = (props) => {
         doc.text(20, 160, 'El estudio surgió de la avalancha de información relacionada con la COVID,\nla enfermedad causada por el coronavirus SARS-2, que apuntaba a que la edad se\nasociaba a mayor mortalidad. Sin embargo, no había evidencia sólida para\nsaber qué debíaconsiderarse “edad avanzada” para esta enfermedad.\nAl mismo tiempo, se estaban comunicando gran cantidad de casos de fallecimientos en\ngente joven.')      
         doc.text(20, 290, 'Grafica para la tasa de mortalidad por coronavirus (COVID-19) en un país.:')
         doc.addImage(imagenmostrar.img,'PNG',50,330,450,300)
+        doc.addImage(fiusac,'PNG',470,10,75,75)
         doc.text(60,650,'Tasa de mortalidad por coronavirus (COVID-19) en un país:')
         doc.setTextColor(255,0,25)
         doc.text(100,670,imagenmostrar.tasa)

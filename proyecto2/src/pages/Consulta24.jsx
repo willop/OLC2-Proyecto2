@@ -5,6 +5,7 @@ import "../components/style/Consulta1.css";
 import logo from "./IMG/preview.png"
 import Reporte24 from "../components/Report/Reporte24"
 import {jsPDF} from 'jspdf'
+import fiusac from "./IMG/logo+fiusac.png"
 
 
 const Consulta24 = (props) => {
@@ -71,6 +72,7 @@ const Consulta24 = (props) => {
         doc.text(20, 300, 'Grafica de aplicacion del modelo de regresion polinomial para una tendencia\nde vacunacion de COVID-19:')
         doc.addImage(imagenmostrar.img,'PNG',100,350,380,280)
         doc.text(100,660,'Concluision:')
+        doc.addImage(fiusac,'PNG',470,10,75,75)
         doc.setTextColor(0,0,255)
         doc.text(50,680,imagenmostrar.conclusion)
         doc.setTextColor(50,50,50)

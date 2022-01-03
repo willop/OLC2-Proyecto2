@@ -6,6 +6,7 @@ import "../components/style/Consulta1.css";
 import logo from "./IMG/preview.png"
 import Reporte25 from "../components/Report/Reporte25"
 import { jsPDF } from 'jspdf'
+import fiusac from "./IMG/logo+fiusac.png"
 
 
 const Consulta25 = (props) => {
@@ -82,6 +83,7 @@ const Consulta25 = (props) => {
         doc.text(20, 160, 'A partir de los datos registrados, hemos podido desarrollar un modelo matemático\nque refleja el flujo de la población entre los diferentes grupos de interés en relación\ncon la COVID-19. Esta herramienta permite analizar diferentes escenarios basados\nn medidas de restricción socio-sanitarias y pronosticar el número de infectados,\nhospitalizados e ingresados en UCI.')
         doc.text(20, 280, 'Manual de aplicacion del modelo de regresion polinomial para una prediccion\nde la infeccion de COVID-19 a un año:')
         doc.addImage(imagenmostrar.img, 'PNG', 100, 320, 400, 280)
+        doc.addImage(fiusac,'PNG',470,10,75,75)
         doc.text(100, 620, 'Ecuacion polinomial de grado 2:')
         doc.setTextColor(0, 0, 255)
         doc.text(150, 640, imagenmostrar.mse)

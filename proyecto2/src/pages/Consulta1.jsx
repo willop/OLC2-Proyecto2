@@ -5,6 +5,7 @@ import "../components/style/Consulta1.css";
 import logo from "./IMG/preview.png"
 import Reporte from "../components/Report/Reporte1"
 import {jsPDF} from 'jspdf'
+import fiusac from "./IMG/logo+fiusac.png"
 
 
 const Consulta1 = (props) => {
@@ -84,6 +85,7 @@ const Consulta1 = (props) => {
         doc.text(20, 160, 'La subregión del Caribe y el Océano Atlántico sigue viendo una aceleración \nde los casos de COVID-19, y algunos países han declarado una quinta oleada \nde la pandemia en los últimos días. Entre los 36 países y territorios de la \nsubregión, al menos la mitad de ellos han experimentado un aumento del \n100% o más de casos durante los últimos 7 días en comparación con los \n7 días anteriores (rango: 100% - 879%).')      
         doc.text(20, 300, 'Manual de aplicacion del modelo de regresion polinomial para una tendencia de\ninfeccion de COVID-19:')
         doc.addImage(imagenmostrar.img,'PNG',100,320,380,280)
+        doc.addImage(fiusac,'PNG',470,10,75,75)
         doc.text(100,620,'Ecuacion del modelo de regresion polinomial de grado 2:')
         doc.setTextColor(0,0,255)
         doc.text(150,640,imagenmostrar.ecuacion)

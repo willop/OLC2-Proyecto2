@@ -5,6 +5,7 @@ import "../components/style/Consulta1.css";
 import logo from "./IMG/preview.png"
 import Reporte3 from "../components/Report/Reporte3"
 import {jsPDF} from 'jspdf'
+import fiusac from "./IMG/logo+fiusac.png"
 
 
 const Consulta3 = (props) => {
@@ -75,6 +76,7 @@ const Consulta3 = (props) => {
         doc.text(20, 160, 'A partir de los datos registrados, hemos podido desarrollar un modelo matemático\nque refleja el flujo de la población entre los diferentes grupos de interés en relación\ncon la COVID-19. Esta herramienta permite analizar diferentes escenarios basados\nn medidas de restricción socio-sanitarias y pronosticar el número de infectados,\nhospitalizados e ingresados en UCI.')      
         doc.text(20, 300, 'Manual de aplicacion del modelo de regresion lineal para una tendencia de\ninfeccion de COVID-19:')
         doc.addImage(imagenmostrar.img,'PNG',100,320,380,280)
+        doc.addImage(fiusac,'PNG',470,10,75,75)
         doc.text(100,620,'La ecuacion de progresion lineal para este modelo es:')
         doc.setTextColor(0,0,255)
         doc.text(150,640,imagenmostrar.ecuacion)

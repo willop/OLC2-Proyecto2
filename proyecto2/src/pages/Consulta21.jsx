@@ -6,6 +6,7 @@ import "../components/style/Consulta1.css";
 import logo from "./IMG/preview.png"
 import Reporte21 from "../components/Report/Reporte21"
 import { jsPDF } from 'jspdf'
+import fiusac from "./IMG/logo+fiusac.png"
 
 
 const Consulta21 = (props) => {
@@ -91,6 +92,7 @@ const Consulta21 = (props) => {
         doc.text(20, 160, 'A partir de los datos registrados, hemos podido desarrollar un modelo matemático\nque refleja el flujo de la población entre los diferentes grupos de interés en relación\ncon la COVID-19. Esta herramienta permite analizar diferentes escenarios basados\nn medidas de restricción socio-sanitarias y pronosticar el número de infectados,\nhospitalizados e ingresados en UCI.')
         doc.text(20, 280, 'Manual de aplicacion del modelo de regresion polinomial para una prediccion\nde la infeccion de COVID-19 a un año:')
         doc.addImage(imagenmostrar.img, 'PNG', 100, 320, 400, 280)
+        doc.addImage(fiusac,'PNG',470,10,75,75)
         doc.text(100, 620, 'Ecuacion polinomial de grado 2:')
         doc.setTextColor(0, 0, 255)
         doc.text(150, 640, imagenmostrar.ecuacion)
@@ -108,6 +110,7 @@ const Consulta21 = (props) => {
         doc.setFontSize('13')
         doc.text(355, 810, 'Autor: Wilfred Stewart Perez Solorzano\nCarnet:201408419')
         doc.addPage()
+        doc.addImage(fiusac,'PNG',470,10,75,75)
         doc.setFont('Arial', 'normal')
         doc.setFontSize('16')
         doc.text('Predicción de casos de un país para un año.', 190, 40)

@@ -5,7 +5,7 @@ import "../components/style/Consulta1.css";
 import logo from "./IMG/preview.png"
 import Reporte10 from "../components/Report/Reporte10"
 import {jsPDF} from 'jspdf'
-
+import fiusac from "./IMG/logo+fiusac.png"
 
 const Consulta10 = (props) => {
 
@@ -97,6 +97,7 @@ const Consulta10 = (props) => {
         doc.text('Ánalisis Comparativo de Vacunaciópn entre 2 paises.',130,130 )
         doc.text(20, 160, 'Grafica de aplicacion del modelo de regresion polinomial para dos paises')
         doc.addImage(imagenmostrar.img,'PNG',100,180,380,280)
+        doc.addImage(fiusac,'PNG',470,10,75,75)
         doc.text(100,470,'Ecuacion polinomial de grado 2 para el primer pais:')
         doc.setTextColor(0,0,255)
         doc.text(130,490,imagenmostrar.ecuacion)
