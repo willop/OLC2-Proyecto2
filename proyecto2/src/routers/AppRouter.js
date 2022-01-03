@@ -37,9 +37,9 @@ export default function AppRouter() {
         <BrowserRouter>
         <Barra_nav/>
             <Routes>
-                <Route path="/" element={<Lista_reportes/>} > </Route>
-                <Route path="/carga_masiva" element={<Carga_archivo/>} > </Route>
-                <Route path="/consulta1" element={<Consulta1/>} > </Route>
+                <Route path="https://willop.github.io/OLC2-Proyecto2/" element={<Lista_reportes/>} > </Route>
+                <Route path="https://willop.github.io/OLC2-Proyecto2/carga_masiva" element={<Carga_archivo/>} > </Route>
+                <Route path="https://willop.github.io/OLC2-Proyecto2/consulta1" element={<Consulta1/>} > </Route>
                 <Route path="/consulta2" element={<Consulta2/>} > </Route>
                 <Route path="/consulta3" element={<Consulta3/>} > </Route>
                 <Route path="/consulta4" element={<Consulta4/>} > </Route>
