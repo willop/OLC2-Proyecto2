@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.89d36092.css",
+    "main.js": "/static/js/main.93cf1ca4.js",
+    "static/js/498.cecc3eed.chunk.js": "/static/js/498.cecc3eed.chunk.js",
+    "static/js/703.9dbe2e64.chunk.js": "/static/js/703.9dbe2e64.chunk.js",
+    "static/js/13.83b6efbf.chunk.js": "/static/js/13.83b6efbf.chunk.js",
+    "static/media/logo+fiusac.png": "/static/media/logo+fiusac.b9c12aab63a9bd694d3c.png",
+    "static/media/preview.png": "/static/media/preview.28762b8b5c0fc8ea6552.png",
+    "index.html": "/index.html",
+    "main.89d36092.css.map": "/static/css/main.89d36092.css.map",
+    "main.93cf1ca4.js.map": "/static/js/main.93cf1ca4.js.map",
+    "498.cecc3eed.chunk.js.map": "/static/js/498.cecc3eed.chunk.js.map",
+    "703.9dbe2e64.chunk.js.map": "/static/js/703.9dbe2e64.chunk.js.map",
+    "13.83b6efbf.chunk.js.map": "/static/js/13.83b6efbf.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.89d36092.css",
+    "static/js/main.93cf1ca4.js"
+  ]
+}
