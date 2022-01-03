@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FormGroup, Input } from 'reactstrap';
 import { Form,Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../components/style/CargaArchivo.css'
 
 
 export class Carga_archivo extends Component {
@@ -36,7 +37,12 @@ export class Carga_archivo extends Component {
     render() {
         return (
             <div>
-                <center><h1>Cargar archivo</h1></center>
+                    <br/>
+                    <br/>
+                    <br/>
+                <div id='ID_letrero'>
+                    <center><h1>Cargar archivo</h1></center>
+                </div>
                 <br/>
                 <br/>
                 <FormGroup>
