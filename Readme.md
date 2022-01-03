@@ -172,7 +172,7 @@ Carga de Fuente de Datos: Esta opción será la encargada de cargar una fuente e
 
 ### Flujo de la Aplicación
 
-<img src="">
+<img src="./IMG/flujo.png">
 
 ## Imagenes de la aplicación
 
