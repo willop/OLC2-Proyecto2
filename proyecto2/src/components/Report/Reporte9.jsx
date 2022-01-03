@@ -21,6 +21,8 @@ const Reporte9=({contenido}) => {
                        {contenido.r_cuadrado}<br/>
                        Error cuadratico medio(RMSE):<br/>
                        {contenido.mse}<br/>
+                       Conclusion:<br/>
+                       {contenido.conclusion}<br/>
                     </p>                        
                     <p>   
                        Autor: Wilfred Stewart Perez Solorzano<br/>Carnet:201408419

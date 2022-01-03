@@ -1,28 +1,29 @@
 import React from 'react'
 
-const Reporte11=({contenido}) => {
+const Reporte25=({contenido}) => {
     return(
         <div id="ID_reporte" >
                 <div id="ID_imagen_reporte">
-                    <center><h1>GRAFICA DE PORCENTAJE DE HOMBRES</h1></center>                  
+                    <center><h1>GRAFICA DE PREDICCION DE MUERTES EN UN AÑO</h1></center>
+                    
                     <center><img src={contenido.img}/></center>
                 </div>
                 <div id="ID_reporte_contenido">
                     <center>
-                    <h2>Porcentaje de hombres infectados por covid-19 en un País desde el primer caso activo</h2>
+                    <h2>Predicción de casos de un país para un año.</h2>
                     <p>
-                    Las vacunas para prevenir la enfermedad por coronavirus 2019 (COVID-19) tal vez sean la mejor esperanza para terminar con la pandemia. Sin embargo, mientras la Administración de Alimentos y Medicamentos (FDA, por sus siglas en inglés) siga aprobando o autorizando el uso de emergencia de las vacunas contra la COVID-19, es probable que sigas teniendo preguntas.
+                    La subregión del Caribe y el Océano Atlántico sigue viendo una aceleración de los casos de COVID-19, y algunos países han declarado una quinta oleada de la pandemia en los últimos días. Entre los 36 países y territorios de la subregión, al menos la mitad de ellos han experimentado un aumento del 100% o más de casos durante los últimos 7 días en comparación con los 7 días anteriores (rango: 100% - 879%).
                     </p>
                     <br/>
                     <p>
-                       Cantidad de personas totales infectados:<br/>
-                       {contenido.total}<br/>
-                       Cantidad de hombres infectados:<br/>
-                       {contenido.hombres}<br/>
-                       Porcentaje de hombres infectados:<br/>
-                       {contenido.porcentaje}<br/>
-                    </p>                        
-                    <p>   
+                       Ecuacion polinomial de grado 2:<br/>
+                       {contenido.mse}<br/>
+                       Coeficiente de determinacion(R^2):<br/>
+                       {contenido.val_r_cuadrado}<br/>
+                       Cantidad de muertes aproximadas son:<br/>
+                       {contenido.aprox}<br/>
+                       <br/>
+                       <br/>
                        Autor: Wilfred Stewart Perez Solorzano<br/>Carnet:201408419
                     </p>
                     </center>
@@ -31,4 +32,6 @@ const Reporte11=({contenido}) => {
     )
 }
 
-export default Reporte11;
+export default Reporte25;
+
+

@@ -58,7 +58,7 @@ const Consulta3 = (props) => {
             console.log(imagenmostrar.indice)
             
 
-            imagenmostrar.indice > 1 ?  imagenmostrar.conclusion='La pendiente y la intersección definen la relación lineal entre dos\nvariables, y se pueden utilizar para estimar una tasa de cambio\npromedio. En este modelo en especifico siendo una pendiente mayor a\n1 se puede concluir que nos referimos a una alta progresion en\nlos datos tendiendo a crecer rapidamente.' : imagenmostrar.conclusion='La pendiente y la intersección definen la relación lineal entre dos\nvariables, y se pueden utilizar para estimar una tasa de cambio\npromedio. En este modelo en especifico siendo una pendiente menor a\n1 se puede concluir que nos baja progresion en los datos tendiendo\na crecer lentamente en el transcurso del tiempo.'
+            imagenmostrar.indice > 1 ?  imagenmostrar.conclusion='La pendiente y la intersección definen la relación lineal entre dos\nvariables, y se pueden utilizar para estimar una tasa de cambio\npromedio. En este modelo en especifico siendo una pendiente mayor a\n1 se, puede concluir que nos referimos a una alta progresion en\nlos datos tendiendo a crecer rapidamente.' : imagenmostrar.conclusion='La pendiente y la intersección definen la relación lineal entre dos\nvariables, y se pueden utilizar para estimar una tasa de cambio\npromedio. En este modelo en especifico siendo una pendiente menor a\n1 se puede concluir que nos baja progresion en los datos tendiendo\na crecer lentamente en el transcurso del tiempo.'
             //console.log(imagenmostrar.pendiente)
         } catch (error) {
 

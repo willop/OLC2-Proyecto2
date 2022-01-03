@@ -14,7 +14,8 @@ const Consulta9 = (props) => {
         img: logo,
         ecuacion: 'y= ax+b',
         mse:'',
-        r_cuadrado:''
+        r_cuadrado:'',
+        conclusion:''
         
     })
     
@@ -64,7 +65,8 @@ const Consulta9 = (props) => {
             variable = json.r_cuadrado
             imagenmostrar.r_cuadrado = parseFloat(variable).toFixed(4)
                       
-            
+            imagenmostrar.conclusion = 'Dado el coeficiente de la regresion polinomial de grado 2 se puede\nevidenciar un incremento en el\nnumero de muertes en el pais.'
+
             //console.log(imagenmostrar.pendiente)
         } catch (error) {
 
@@ -77,13 +79,13 @@ const Consulta9 = (props) => {
         doc.text(20, 20, 'Universidad San Calos de Guatemala\nFacultad de Ingenieria\nEscuela de Ciencias y Sistemas\nOLC2')
   
         doc.setFont('Arial', 'normal')
-        doc.text('Tendencia de la vacunación de un País.',130,130 )
+        doc.text('Tendencia de la vacunación de un País.',160,130 )
         doc.text(20, 160, 'La covid-19, la enfermedad provocada por el nuevo coronavirus, fue reportada\npor primera vez a fines de 2019 en China. A mediados de enero de 2021\nse pasó la marca de los dos millones de fallecidos a nivel mundial, según el conteo\nde la Universidad Johns Hopkins, y ya se superó los 100 millones de casos confirmados.')      
         doc.text(20, 270, 'Grafica de aplicacion del modelo de regresion polinomial para una tendencia\nde vacunacion de COVID-19:')
         doc.addImage(imagenmostrar.img,'PNG',100,310,380,280)
         doc.text(100,620,'Ecuacion polinomial de grado 2:')
         doc.setTextColor(0,0,255)
-        doc.text(50,640,imagenmostrar.ecuacion)
+        doc.text(200,640,imagenmostrar.ecuacion)
         doc.setTextColor(0,0,0)
         doc.text(100,660,'Ultimo registro de muertes en el pais')
         doc.setTextColor(0,0,255)
@@ -93,6 +95,10 @@ const Consulta9 = (props) => {
         doc.text(100,700,'Coeficiente de determinacion(R^2):')
         doc.setTextColor(0,0,255)
         doc.text(200,720,imagenmostrar.r_cuadrado)
+        doc.setTextColor(0,0,0)
+        doc.text(100,740,'Conclusion:')
+        doc.setTextColor(0,0,255)
+        doc.text(150,760,imagenmostrar.conclusion)
         doc.setTextColor(50,50,50)
         doc.setFont('Comic Sans','italic')
         doc.setFontSize('13')

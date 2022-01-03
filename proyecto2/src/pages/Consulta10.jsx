@@ -17,7 +17,8 @@ const Consulta10 = (props) => {
         r_cuadrado:'',
         ecuacion2: '',
         mse2:'',
-        r_cuadrado2:'',        
+        r_cuadrado2:'',   
+        conclusion:'',     
     })
     
     
@@ -78,6 +79,8 @@ const Consulta10 = (props) => {
             console.log("R al cuadrado2")
             variable = json.r_cuadrado2
             imagenmostrar.r_cuadrado2 = parseFloat(variable).toFixed(4)
+
+            imagenmostrar.r_cuadrado < imagenmostrar.r_cuadrado2 ? imagenmostrar.conclusion='Se puede observar que  la vacunacion en el primer pais\ncuenta con uma mejor dispersion de datos que el primer pais':imagenmostrar.conclusion='Se puede observar que  la vacunacion en el segundo pais\ncuenta con uma mejor dispersion de datos que el segundo pais'
                            
             //console.log(imagenmostrar.pendiente)
         } catch (error) {
@@ -120,7 +123,10 @@ const Consulta10 = (props) => {
         doc.text(100,700,'Coeficiente de determinacion(R^2):')
         doc.setTextColor(227,66,51)
         doc.text(130,720,imagenmostrar.r_cuadrado)
-
+        doc.setTextColor(0,0,0)
+        doc.text(100,740,'Conclusion:')
+        doc.setTextColor(0,0,0)
+        doc.text(130,760,imagenmostrar.conclusion)
         doc.setTextColor(50,50,50)
         doc.setFont('Comic Sans','italic')
         doc.setFontSize('13')        

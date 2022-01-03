@@ -84,7 +84,7 @@ const Consulta15 = (props) => {
         doc.addImage(imagenmostrar.img,'PNG',100,310,380,280)
         doc.text(100,620,'Ecuacion polinomial de grado 2:')
         doc.setTextColor(0,0,255)
-        doc.text(50,640,imagenmostrar.ecuacion)
+        doc.text(200,640,imagenmostrar.ecuacion)
         doc.setTextColor(0,0,0)
         doc.text(100,660,'Ultimo registro de muertes en el pais')
         doc.setTextColor(0,0,255)

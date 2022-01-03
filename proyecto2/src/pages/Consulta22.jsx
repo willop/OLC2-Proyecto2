@@ -3,18 +3,18 @@ import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../components/style/Consulta1.css";
 import logo from "./IMG/preview.png"
-import Reporte11 from "../components/Report/Reporte11"
+import Reporte22 from "../components/Report/Reporte22"
 import {jsPDF} from 'jspdf'
 
 
-const Consulta11 = (props) => {
+const Consulta22 = (props) => {
 
     const [switchComp, setSwitch] = useState(false);
     const [imagenmostrar,setimg]=useState({
         img: logo,
-        ecuacion: 'y= ax+b',
-        mse:'',
-        r_cuadrado:''
+        tasa: '20',
+        conclusion:''
+        
         
     })
     
@@ -24,7 +24,7 @@ const Consulta11 = (props) => {
         varpais: '',
         variable1: '',
         variable2: '',
-        cantidad:''
+        variable3: ''
     })
     const handleuserchange = (event) =>{
         setDatos({...datos,[event.target.name]: event.target.value})
@@ -48,22 +48,15 @@ const Consulta11 = (props) => {
                 },
                 body: JSON.stringify(datos)
             }
-            let respuesta = await fetch('http://localhost:4000/consulta11', configuracion)
+            let respuesta = await fetch('http://localhost:4000/consulta17', configuracion)
             let json = await respuesta.json();
             console.log('valor de la respuesta json')
             console.log(json)
             imagenmostrar.img = "data:image/png;base64, "+json.img
-            imagenmostrar.ecuacion = json.ecuacion
+            imagenmostrar.tasa = json.tasa
 
-            console.log("mse")
-            var variable = json.mse
-            imagenmostrar.mse = parseFloat(variable).toFixed(4)
-            console.log(imagenmostrar.mse)
+            imagenmostrar.tasa <=1 ? imagenmostrar.conclusion = 'Como se puede observar la tasa de mortalidad es baja\nesto nos indica una correcta prevencion de la enfermeda Covid-19' : imagenmostrar.conclusion = 'Como se puede observar la tasa de mortalidad es alta\nesto nos indica una incorrecta prevencion de la enfermeda Covid-19'
 
-            console.log("R al cuadrado")
-            variable = json.r_cuadrado
-            imagenmostrar.r_cuadrado = parseFloat(variable).toFixed(4)
-                      
             
             //console.log(imagenmostrar.pendiente)
         } catch (error) {
@@ -77,22 +70,17 @@ const Consulta11 = (props) => {
         doc.text(20, 20, 'Universidad San Calos de Guatemala\nFacultad de Ingenieria\nEscuela de Ciencias y Sistemas\nOLC2')
   
         doc.setFont('Arial', 'normal')
-        doc.text('Tendencia de la vacunación de un País.',130,130 )
-        doc.text(20, 160, 'La covid-19, la enfermedad provocada por el nuevo coronavirus, fue reportada\npor primera vez a fines de 2019 en China. A mediados de enero de 2021\nse pasó la marca de los dos millones de fallecidos a nivel mundial, según el conteo\nde la Universidad Johns Hopkins, y ya se superó los 100 millones de casos confirmados.')      
-        doc.text(20, 270, 'Grafica de aplicacion del modelo de regresion polinomial para una tendencia\nde vacunacion de COVID-19:')
-        doc.addImage(imagenmostrar.img,'PNG',100,310,380,280)
-        doc.text(100,620,'Ecuacion polinomial de grado 2:')
-        doc.setTextColor(0,0,255)
-        doc.text(50,640,imagenmostrar.ecuacion)
+        doc.text('Tasa de comportamiento de casos activos en relación al número de muertes en un continente.',40,130 )
+        doc.text(20, 160, 'El estudio surgió de la avalancha de información relacionada con la COVID,\nla enfermedad causada por el coronavirus SARS-2, que apuntaba a que la edad se\nasociaba a mayor mortalidad. Sin embargo, no había evidencia sólida para\nsaber qué debíaconsiderarse “edad avanzada” para esta enfermedad.\nAl mismo tiempo, se estaban comunicando gran cantidad de casos de fallecimientos en\ngente joven.')      
+        doc.text(20, 290, 'Grafica para la tasa de mortalidad por coronavirus (COVID-19) en un país.:')
+        doc.addImage(imagenmostrar.img,'PNG',50,330,450,300)
+        doc.text(60,650,'Tasa de mortalidad por coronavirus (COVID-19) en un país:')
+        doc.setTextColor(255,0,25)
+        doc.text(100,670,imagenmostrar.tasa)
         doc.setTextColor(0,0,0)
-        doc.text(100,660,'Ultimo registro de muertes en el pais')
+        doc.text(60,690,'Conclusion:')
         doc.setTextColor(0,0,255)
-        doc.text(200,680,imagenmostrar.mse)
-        doc.setTextColor(50,50,50)
-        doc.setTextColor(0,0,0)
-        doc.text(100,700,'Coeficiente de determinacion(R^2):')
-        doc.setTextColor(0,0,255)
-        doc.text(200,720,imagenmostrar.r_cuadrado)
+        doc.text(100,710,imagenmostrar.conclusion)
         doc.setTextColor(50,50,50)
         doc.setFont('Comic Sans','italic')
         doc.setFontSize('13')
@@ -104,7 +92,7 @@ const Consulta11 = (props) => {
         if (switchComp) {
             return (
                 <div>
-                    <Reporte11 contenido={imagenmostrar} />                  
+                    <Reporte22 contenido={imagenmostrar} />                  
                 </div>            
             )
         }else{
@@ -124,20 +112,21 @@ const Consulta11 = (props) => {
         setSwitch(!switchComp)
     }
 
-
     return (
         <div id="ID_general">
             <div id="ID_consulta">
-                <center><h2>Tendencia de la vacunación de un País.</h2></center>
+                <center><h2>Tasa de comportamiento de casos activos en relación al número de muertes en un continente.</h2></center>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Ingrese la columna de Paises</Form.Label>
+                    <Form.Label>Ingrese la columna de Pais</Form.Label>
                     <Form.Control name="varcolpais" type="text" placeholder="Ingrese la columna de los Paises"  onChange={handleuserchange}/>
                     <Form.Label>Ingrese el nombre del Pais</Form.Label>
-                    <Form.Control name="varpais" type="text" placeholder="Ingrese el nombre del pais"  onChange={handleuserchange}/>
+                    <Form.Control name="varpais" type="text" placeholder="Ingrese el nombre del Pais"  onChange={handleuserchange}/>
                     <Form.Label>Ingrese la columna de fechas</Form.Label>
                     <Form.Control name="variable1" type="text" placeholder="Ingrese la columna de fechas"  onChange={handleuserchange}/>
-                    <Form.Label>Ingrese la columna de vacunacion</Form.Label>
-                    <Form.Control name="variable2" type="text" placeholder="Ingrese la columna de vacunacion" onChange={handleuserchange} />
+                    <Form.Label>Ingrese la columna de muertes</Form.Label>
+                    <Form.Control name="variable2" type="text" placeholder="Ingrese la columna de muertes" onChange={handleuserchange} />
+                    <Form.Label>Ingrese la columna de infectados</Form.Label>
+                    <Form.Control name="variable3" type="text" placeholder="Ingrese la columna de infectados" onChange={handleuserchange} />
                 </Form.Group>
                 <Button variant="danger" id="boton_enviar" onClick={enviarDatos}>Enviar</Button>
             </div>
@@ -152,4 +141,4 @@ const Consulta11 = (props) => {
     )
 }
 
-export default Consulta11
+export default Consulta22

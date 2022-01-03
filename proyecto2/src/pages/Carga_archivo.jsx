@@ -36,6 +36,9 @@ export class Carga_archivo extends Component {
     render() {
         return (
             <div>
+                <center><h1>Cargar archivo</h1></center>
+                <br/>
+                <br/>
                 <FormGroup>
                     <Input id="exampleFile" name="files" type="file" accept=".json, .csv, .xls, .xlsx" onChange={this.changeText}/>
                     <Button variant="outline-info" id="boton_enviar" onClick={() => this.enviarDatos()}>Listo</Button>

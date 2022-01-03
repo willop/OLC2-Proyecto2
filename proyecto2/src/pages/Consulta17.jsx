@@ -13,8 +13,7 @@ const Consulta17 = (props) => {
     const [imagenmostrar,setimg]=useState({
         img: logo,
         tasa: '20',
-        
-        
+        conclusion:'',
     })
     
     
@@ -54,6 +53,7 @@ const Consulta17 = (props) => {
             imagenmostrar.img = "data:image/png;base64, "+json.img
             imagenmostrar.tasa = json.tasa
 
+            imagenmostrar.tasa < 1 ? imagenmostrar.conclusion = 'Ya que la tasa de casos activos esta por debajo de 0.5 se concluye que\nla cantidad de personas muertas es menor que el de las personas infectadas.' : imagenmostrar.conclusion = 'Ya que la tasa de casos activos esta por encima de 0.5 se concluye\nque la cantidad de personas infectadas es menor que el de las personas muertas'
             
             //console.log(imagenmostrar.pendiente)
         } catch (error) {
@@ -67,13 +67,18 @@ const Consulta17 = (props) => {
         doc.text(20, 20, 'Universidad San Calos de Guatemala\nFacultad de Ingenieria\nEscuela de Ciencias y Sistemas\nOLC2')
   
         doc.setFont('Arial', 'normal')
+        doc.setFontSize('14')
         doc.text('Tasa de comportamiento de casos activos en relación al número de muertes en un continente.',40,130 )
         doc.text(20, 160, 'El estudio surgió de la avalancha de información relacionada con la COVID,\nla enfermedad causada por el coronavirus SARS-2, que apuntaba a que la edad se asociaba\na mayor mortalidad. Sin embargo, no había evidencia sólida para saber qué debía\nconsiderarse “edad avanzada” para esta enfermedad.\nAl mismo tiempo, se estaban comunicando gran cantidad de casos de fallecimientos en\ngente joven.')      
         doc.text(20, 270, 'Grafica de Tasa de comportamiento de casos activos en relación al número de\nmuertes en un continente de COVID-19:')
-        doc.addImage(imagenmostrar.img,'PNG',50,310,500,340)
-        doc.text(60,690,'Tasa de comportamiento de casos activos en relación al número de muertes\nen un continente.:')
+        doc.addImage(imagenmostrar.img,'PNG',50,310,450,300)
+        doc.text(60,650,'Tasa de comportamiento de casos activos en relación al número de muertes\nen un continente.:')
         doc.setTextColor(255,0,25)
-        doc.text(100,730,imagenmostrar.tasa)
+        doc.text(100,690,imagenmostrar.tasa)
+        doc.setTextColor(0,0,0)
+        doc.text(60,710,'Conclusion:')
+        doc.setTextColor(0,0,255)
+        doc.text(100,730,imagenmostrar.conclusion)
         doc.setTextColor(50,50,50)
         doc.setFont('Comic Sans','italic')
         doc.setFontSize('13')

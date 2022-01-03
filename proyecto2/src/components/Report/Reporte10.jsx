@@ -12,8 +12,9 @@ const Reporte10=({contenido}) => {
                     <center>
                     <h2>Analisis comparativo de vacunacion entre 2 paises.</h2>
                     <br/>
-                    <p>
+                    
                      <h2>Informacion del primer pais</h2>
+                     <p>
                        Ecuacion del modelo de regresion polinomial de grado 2:<br/>
                        {contenido.ecuacion}<br/>
                        Coeficiente de determinacion(R^2):<br/>
@@ -21,13 +22,22 @@ const Reporte10=({contenido}) => {
                        Error cuadratico medio:<br/>
                        {contenido.mse}<br/>
                        <br/>
-                       <h2>Informacion del segundo pais</h2>
+                    </p>
+                    <h2>Informacion del segundo pais</h2>
+                    <p>
+                       
                        Ecuacion del modelo de regresion polinomial de grado 2:<br/>
                        {contenido.ecuacion2}<br/>
                        Coeficiente de determinacion(R^2):<br/>
                        {contenido.r_cuadrado2}<br/>
                        Error cuadratico medio:<br/>
                        {contenido.mse2}<br/>
+                       <br/>
+                       <br/>
+                       Conclusion:<br/>
+                       {contenido.conclusion}
+                       <br/>
+                       <br/>
                        <br/>
                        Autor: Wilfred Stewart Perez Solorzano<br/>Carnet:201408419
                     </p>
