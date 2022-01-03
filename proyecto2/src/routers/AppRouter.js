@@ -37,33 +37,33 @@ export default function AppRouter() {
         <BrowserRouter>
         <Barra_nav/>
             <Routes>
-                <Route path="./" element={<Lista_reportes/>} > </Route>
-                <Route path="./carga_masiva" element={<Carga_archivo/>} > </Route>
-                <Route path="./consulta1" element={<Consulta1/>} > </Route>
-                <Route path="/consulta2" element={<Consulta2/>} > </Route>
-                <Route path="/consulta3" element={<Consulta3/>} > </Route>
-                <Route path="/consulta4" element={<Consulta4/>} > </Route>
-                <Route path="/consulta5" element={<Consulta5/>} > </Route>
-                <Route path="/consulta6" element={<Consulta6/>} > </Route>
-                <Route path="/consulta7" element={<Consulta7/>} > </Route>
-                <Route path="/consulta8" element={<Consulta8/>} > </Route>
-                <Route path="/consulta9" element={<Consulta9/>} > </Route>
-                <Route path="/consulta10" element={<Consulta10/>} > </Route>
-                <Route path="/consulta11" element={<Consulta11/>} > </Route>
-                <Route path="/consulta12" element={<Consulta12/>} > </Route>
-                <Route path="/consulta13" element={<Consulta13/>} > </Route>
-                <Route path="/consulta14" element={<Consulta14/>} > </Route>
-                <Route path="/consulta15" element={<Consulta15/>} > </Route>
-                <Route path="/consulta16" element={<Consulta16/>} > </Route>
-                <Route path="/consulta17" element={<Consulta17/>} > </Route>
-                <Route path="/consulta18" element={<Consulta18/>} > </Route>
-                <Route path="/consulta19" element={<Consulta19/>} > </Route>
-                <Route path="/consulta20" element={<Consulta20/>} > </Route>
-                <Route path="/consulta21" element={<Consulta21/>} > </Route>
-                <Route path="/consulta22" element={<Consulta22/>} > </Route>
-                <Route path="/consulta23" element={<Consulta23/>} > </Route>
-                <Route path="/consulta24" element={<Consulta24/>} > </Route>
-                <Route path="/consulta25" element={<Consulta25/>} > </Route>
+                <Route path=".OLC2-Proyecto2/" element={<Lista_reportes/>} > </Route>
+                <Route path=".OLC2-Proyecto2/carga_masiva" element={<Carga_archivo/>} > </Route>
+                <Route path=".OLC2-Proyecto2/consulta1" element={<Consulta1/>} > </Route>
+                <Route path=".OLC2-Proyecto2/consulta2" element={<Consulta2/>} > </Route>
+                <Route path=".OLC2-Proyecto2/consulta3" element={<Consulta3/>} > </Route>
+                <Route path="./consulta4" element={<Consulta4/>} > </Route>
+                <Route path="./consulta5" element={<Consulta5/>} > </Route>
+                <Route path="./consulta6" element={<Consulta6/>} > </Route>
+                <Route path="./consulta7" element={<Consulta7/>} > </Route>
+                <Route path="./consulta8" element={<Consulta8/>} > </Route>
+                <Route path="./consulta9" element={<Consulta9/>} > </Route>
+                <Route path="./consulta10" element={<Consulta10/>} > </Route>
+                <Route path="./consulta11" element={<Consulta11/>} > </Route>
+                <Route path="./consulta12" element={<Consulta12/>} > </Route>
+                <Route path="./consulta13" element={<Consulta13/>} > </Route>
+                <Route path="./consulta14" element={<Consulta14/>} > </Route>
+                <Route path="./consulta15" element={<Consulta15/>} > </Route>
+                <Route path="./consulta16" element={<Consulta16/>} > </Route>
+                <Route path="./consulta17" element={<Consulta17/>} > </Route>
+                <Route path="./consulta18" element={<Consulta18/>} > </Route>
+                <Route path="./consulta19" element={<Consulta19/>} > </Route>
+                <Route path="./consulta20" element={<Consulta20/>} > </Route>
+                <Route path="./consulta21" element={<Consulta21/>} > </Route>
+                <Route path="./consulta22" element={<Consulta22/>} > </Route>
+                <Route path="./consulta23" element={<Consulta23/>} > </Route>
+                <Route path="./consulta24" element={<Consulta24/>} > </Route>
+                <Route path="./consulta25" element={<Consulta25/>} > </Route>
             </Routes>
         </BrowserRouter>
     )
