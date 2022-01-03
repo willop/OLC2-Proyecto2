@@ -2,7 +2,6 @@
   "name": "proyecto2",
   "version": "0.1.0",
   "private": true,
-  "homepages":"https://willop.github.io/OLC2-Proyecto2/",
   "dependencies": {
     "@react-pdf/renderer": "^2.0.21",
     "@testing-library/jest-dom": "^5.16.1",
@@ -21,8 +20,6 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "predeploy":"npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
