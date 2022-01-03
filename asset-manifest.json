@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/OLC2-Proyecto2/static/css/main.89d36092.css",
-    "main.js": "/OLC2-Proyecto2/static/js/main.87c6a524.js",
+    "main.js": "/OLC2-Proyecto2/static/js/main.ea5fdec6.js",
     "static/js/498.cecc3eed.chunk.js": "/OLC2-Proyecto2/static/js/498.cecc3eed.chunk.js",
     "static/js/703.9dbe2e64.chunk.js": "/OLC2-Proyecto2/static/js/703.9dbe2e64.chunk.js",
     "static/js/13.83b6efbf.chunk.js": "/OLC2-Proyecto2/static/js/13.83b6efbf.chunk.js",
@@ -9,13 +9,13 @@
     "static/media/preview.png": "/OLC2-Proyecto2/static/media/preview.28762b8b5c0fc8ea6552.png",
     "index.html": "/OLC2-Proyecto2/index.html",
     "main.89d36092.css.map": "/OLC2-Proyecto2/static/css/main.89d36092.css.map",
-    "main.87c6a524.js.map": "/OLC2-Proyecto2/static/js/main.87c6a524.js.map",
+    "main.ea5fdec6.js.map": "/OLC2-Proyecto2/static/js/main.ea5fdec6.js.map",
     "498.cecc3eed.chunk.js.map": "/OLC2-Proyecto2/static/js/498.cecc3eed.chunk.js.map",
     "703.9dbe2e64.chunk.js.map": "/OLC2-Proyecto2/static/js/703.9dbe2e64.chunk.js.map",
     "13.83b6efbf.chunk.js.map": "/OLC2-Proyecto2/static/js/13.83b6efbf.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.89d36092.css",
-    "static/js/main.87c6a524.js"
+    "static/js/main.ea5fdec6.js"
   ]
 }
