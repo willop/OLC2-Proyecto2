@@ -50,6 +50,7 @@ def cargamasiva():
     if extensionarchivo == "json":
         print("es un json")
         archivoglobal = pd.read_json(archivoglobal)
+        archivoglobal = pd.replace({"":0," ":0})
     elif extensionarchivo=="csv":
         print("es un csv")
         archivoglobal = pd.read_csv(archivoglobal)
@@ -156,7 +157,6 @@ def consulta1():
     print("El valor de la pendiente es: "+str(m))
     print("El valor de la ecuacion es: "+str(ecuacion))
     return jsonify({"img": imagenbase64,"ecuacion":ecuacion,"val_r":str(valor_r),"pendiente":str(m)})
-
 
 @app.route('/consulta2', methods=['POST'])
 def consulta2():
@@ -294,7 +294,6 @@ def consulta2():
     ecuacion = str(round(intercept,2))+'+'+ str(round(coef[1],2)) + '* x +'+ str(round(coef[2])) +'x^2'  
     print("El valor de la ecuacion es: "+str(ecuacion))
     return jsonify({"img": imagenbase64,"mse":str(ecuacion),"val_r_cuadrado":str(r_cuadrado)})
-
 
 @app.route('/consulta3', methods=['POST'])
 def consulta3():
@@ -540,7 +539,6 @@ def consulta4():
     ecuacion = str(round(intercept,2))+'+'+ str(round(coef[1],2)) + '* x +'+ str(round(coef[2])) +'x^2'  
     print("El valor de la ecuacion es: "+str(ecuacion))
     return jsonify({"img": imagenbase64,"mse":str(ecuacion),"val_r_cuadrado":str(r_cuadrado)})
-
 
 @app.route('/consulta5', methods=['POST'])
 def consulta5():
