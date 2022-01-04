@@ -63,7 +63,7 @@ const Consulta11 = (props) => {
             console.log(imagenmostrar.mse)
 
             imagenmostrar.hombres = json.hombres
-            imagenmostrar.hombres > 50 ?  imagenmostrar.conclusion = 'Se puede evidenciar que la cantidad de hombres infectados no supera\nla mitad de la poblacion infectada, por tanto se recomienda encocarse\nmas en la poblacion de hombres y brindarme una mayor seguridad frente\nal virus.': 'Se puede evidenciar que la cantidad de hombres infectados no supera\nla mitad de la poblacion infectada, por tanto se recomienda encocarse\nmas en la demas poblacion y brindarme una mayor seguridad frente al\nvirus.'
+            imagenmostrar.hombres > 50 ?  imagenmostrar.conclusion = 'Se puede evidenciar que la cantidad de hombres infectados no supera\nla mitad de la poblacion infectada, por tanto se recomienda encocarse\nmas en la poblacion de hombres y brindarme una mayor seguridad frente\nal virus.': imagenmostrar.conclusion = 'Se puede evidenciar que la cantidad de hombres infectados no supera\nla mitad de la poblacion infectada, por tanto se recomienda encocarse\nmas en la demas poblacion y brindarme una mayor seguridad frente al\nvirus.'
             //console.log(imagenmostrar.pendiente)
         } catch (error) {
 
