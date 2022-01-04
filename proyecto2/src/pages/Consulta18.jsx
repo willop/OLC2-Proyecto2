@@ -70,7 +70,9 @@ const Consulta18 = (props) => {
         doc.text(20, 20, 'Universidad San Calos de Guatemala\nFacultad de Ingenieria\nEscuela de Ciencias y Sistemas\nOLC2')
   
         doc.setFont('Arial', 'normal')
+        doc.setFontSize('13')
         doc.text(' Comportamiento y clasificación de personas infectadas por COVID-19 por municipio en un País.',60,130 )
+        doc.setFontSize('17')
         doc.text(20, 160, 'La covid-19, la enfermedad provocada por el nuevo coronavirus, fue reportada\npor primera vez a fines de 2019 en China. A mediados de enero de 2021\nse pasó la marca de los dos millones de fallecidos a nivel mundial, según el conteo\nde la Universidad Johns Hopkins, y ya se superó los 100 millones de casos confirmados.')      
         doc.text(20, 270, 'Grafica de aplicacion del modelo comporamiento de las personas de un municipio\nde COVID-19:')
         doc.addImage(imagenmostrar.img,'PNG',100,310,380,280)
