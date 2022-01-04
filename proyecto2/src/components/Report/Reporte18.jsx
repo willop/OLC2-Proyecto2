@@ -9,9 +9,9 @@ const Reporte18=({contenido}) => {
                 </div>
                 <div id="ID_reporte_contenido">
                     <center>
-                    <h2>Porcentaje de hombres infectados por covid-19 en un País desde el primer caso activo</h2>
+                    <h2> Comportamiento y clasificación de personas infectadas por COVID-19 por municipio en un País.</h2>
                     <p>
-                    Las vacunas para prevenir la enfermedad por coronavirus 2019 (COVID-19) tal vez sean la mejor esperanza para terminar con la pandemia. Sin embargo, mientras la Administración de Alimentos y Medicamentos (FDA, por sus siglas en inglés) siga aprobando o autorizando el uso de emergencia de las vacunas contra la COVID-19, es probable que sigas teniendo preguntas.
+                    Una vacuna contra la COVID-19 puede prevenir que tu hijo se contagie y que trasmita el virus que causa la COVID-19. Si tu hijo se contagia con la COVID-19, una vacuna contra la COVID-19 podría prevenir que se enferme de gravedad.<br/>Vacunarse contra la COVID-19 también le permitirá a tu hijo a comenzar a hacer las cosas que que quizás no pudo hacer durante la pandemia.
                     </p>
                     <br/>
                     <p>
