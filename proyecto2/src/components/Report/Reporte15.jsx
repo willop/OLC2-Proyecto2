@@ -4,7 +4,7 @@ const Reporte11=({contenido}) => {
     return(
         <div id="ID_reporte" >
                 <div id="ID_imagen_reporte">
-                    <center><h1>GRAFICA DE TENDENCIA DE INFECTADOS</h1></center>                  
+                    <center><h1>GRAFICA DE TENDENCIA DE CASOS CONFIRMADOS</h1></center>                  
                     <center><img src={contenido.img}/></center>
                 </div>
                 <div id="ID_reporte_contenido">

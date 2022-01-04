@@ -119,9 +119,9 @@ const Consulta22 = (props) => {
             <div id="ID_consulta">
                 <center><h2>Tasa de comportamiento de casos activos en relación al número de muertes en un continente.</h2></center>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Ingrese la columna de Pais</Form.Label>
+                    <Form.Label>Ingrese la columna de Continente</Form.Label>
                     <Form.Control name="varcolpais" type="text" placeholder="Ingrese la columna de los Paises"  onChange={handleuserchange}/>
-                    <Form.Label>Ingrese el nombre del Pais</Form.Label>
+                    <Form.Label>Ingrese el nombre del continente</Form.Label>
                     <Form.Control name="varpais" type="text" placeholder="Ingrese el nombre del Pais"  onChange={handleuserchange}/>
                     <Form.Label>Ingrese la columna de fechas</Form.Label>
                     <Form.Control name="variable1" type="text" placeholder="Ingrese la columna de fechas"  onChange={handleuserchange}/>

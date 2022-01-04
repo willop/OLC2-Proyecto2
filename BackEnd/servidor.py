@@ -1557,7 +1557,7 @@ def consulta15():
     valoraprox = response[response.size-1]
     plt.scatter(intxx,y,color='blue')
     plt.plot(intxx,response, color='green',linewidth=3)
-    plt.title('Analisis del número de muertes en ' +varpais)
+    plt.title('Tendencia de casos confirmados en ' +varpais)
     plt.xlabel(var1)
     plt.ylabel(var2)
     plt.savefig('./reporte.png')
