@@ -15,7 +15,8 @@ const Consulta16 = (props) => {
         img: logo,
         porcentaje: '100%',
         total:'1000',
-        hombres:'235'
+        hombres:'235',
+        conclusion:''
         
     })
     
@@ -62,7 +63,7 @@ const Consulta16 = (props) => {
             console.log(imagenmostrar.mse)
 
             imagenmostrar.hombres = json.hombres
-                      
+            imagenmostrar.hombres > 50 ?  imagenmostrar.conclusion = 'Se puede evidenciar que la cantidad de hombres infectados no supera\nla mitad de la poblacion infectada, por tanto se recomienda encocarse\nmas en la poblacion de mujeres y brindarme una mayor seguridad frente\nal virus.': imagenmostrar.conclusion = 'Se puede evidenciar que la cantidad de mujeres infectados no supera\nla mitad de la poblacion infectada, por tanto se recomienda encocarse\nmas en la demas poblacion y brindarme una mayor seguridad frente al\nvirus.'
             
             //console.log(imagenmostrar.pendiente)
         } catch (error) {
@@ -93,6 +94,11 @@ const Consulta16 = (props) => {
         doc.text(100,700,'Porcentaje de mujeres:')
         doc.setTextColor(0,0,255)
         doc.text(200,720,imagenmostrar.porcentaje)
+        doc.setTextColor(0,0,0)
+        doc.text(100,740,'Conclusion')
+        doc.setTextColor(0,0,0)
+        doc.sestFontSize('11')
+        doc.text(100,760,imagenmostrar.conclusion)
         doc.setTextColor(50,50,50)
         doc.setFont('Comic Sans','italic')
         doc.setFontSize('13')

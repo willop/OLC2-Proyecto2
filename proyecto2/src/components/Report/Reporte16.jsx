@@ -21,6 +21,8 @@ const Reporte11=({contenido}) => {
                        {contenido.hombres}<br/>
                        Porcentaje de mujeres infectados:<br/>
                        {contenido.porcentaje}<br/>
+                       Conclusion:<br/>
+                       {contenido.conclusion}<br/>
                     </p>                        
                     <p>   
                        Autor: Wilfred Stewart Perez Solorzano<br/>Carnet:201408419

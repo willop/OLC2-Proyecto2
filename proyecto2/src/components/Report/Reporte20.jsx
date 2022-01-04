@@ -26,7 +26,7 @@ const Reporte20 = ({ contenido }) => {
                             <p>
                                 <br />
                                 Tasa de comportamiento de casos activos en relación al número de muertes en un continente.:<br />
-                                {contenido.tasa}<br />
+                                {contenido.tasa2}<br />
                                 <br/><br/>El estudio surgió de la avalancha de información relacionada con la COVID, la enfermedad causada por el coronavirus SARS-2, que apuntaba a que la edad se asociaba a mayor mortalidad. Sin embargo, no había evidencia sólida para saber qué debía considerarse “edad avanzada” para esta enfermedad. Al mismo tiempo, se estaban comunicando gran cantidad de casos de fallecimientos en gente joven.<br/><br/>
                             </p>
                         </center>

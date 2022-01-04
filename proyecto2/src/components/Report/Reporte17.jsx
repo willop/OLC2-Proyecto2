@@ -17,6 +17,8 @@ const Reporte17=({contenido}) => {
                     <p>
                     Tasa de comportamiento de casos activos en relación al número de muertes en un continente.:<br/>
                        {contenido.tasa}<br/>
+                       Conclusion:<br/>
+                       {contenido.conclusion}<br/>
                     </p>                        
                     <p>   
                        Autor: Wilfred Stewart Perez Solorzano<br/>Carnet:201408419
