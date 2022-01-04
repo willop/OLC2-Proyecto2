@@ -15,12 +15,8 @@ const Reporte18=({contenido}) => {
                     </p>
                     <br/>
                     <p>
-                       Cantidad de personas totales infectados:<br/>
-                       {contenido.total}<br/>
-                       Cantidad de hombres infectados:<br/>
-                       {contenido.hombres}<br/>
-                       Porcentaje de hombres infectados:<br/>
-                       {contenido.porcentaje}<br/>
+                       Conclusion:<br/>
+                       {contenido.conclusion}<br/>
                     </p>                        
                     <p>   
                        Autor: Wilfred Stewart Perez Solorzano<br/>Carnet:201408419

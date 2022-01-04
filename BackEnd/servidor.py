@@ -1724,7 +1724,7 @@ def consulta18():
     x = df[var1]
     y = df[var2]
     
-    plt.bar(x,y,color ='orange',linestyle="-", label="Muertes")
+    plt.scatter(x,y,color ='orange',linestyle="-", label="Muertes")
     plt.title('Tasa de comportamiento de casos activos en relacion al numero\nde muertes en el continente ' +varpais)
     plt.xlabel(var1)
     plt.ylabel(var2)

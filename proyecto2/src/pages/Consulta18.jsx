@@ -14,7 +14,8 @@ const Consulta18 = (props) => {
         img: logo,
         ecuacion: 'y= ax+b',
         mse:'',
-        r_cuadrado:''
+        r_cuadrado:'',
+        conclusion:'',
         
     })
     
@@ -54,17 +55,8 @@ const Consulta18 = (props) => {
             console.log('valor de la respuesta json')
             console.log(json)
             imagenmostrar.img = "data:image/png;base64, "+json.img
-            imagenmostrar.ecuacion = json.ecuacion
-
-            console.log("mse")
-            var variable = json.mse
-            imagenmostrar.mse = parseFloat(variable).toFixed(4)
-            console.log(imagenmostrar.mse)
-
-            console.log("R al cuadrado")
-            variable = json.r_cuadrado
-            imagenmostrar.r_cuadrado = parseFloat(variable).toFixed(4)
-                      
+            imagenmostrar.conclusion = 'Se observa el comportamiento del municipio de '+imagenmostrar.varcolmuni +'\nsegun la cantidad de personas infectadas'
+                     
             
             //console.log(imagenmostrar.pendiente)
         } catch (error) {
@@ -83,18 +75,10 @@ const Consulta18 = (props) => {
         doc.text(20, 270, 'Grafica de aplicacion del modelo de regresion polinomial para una tendencia\nde vacunacion de COVID-19:')
         doc.addImage(imagenmostrar.img,'PNG',100,310,380,280)
         doc.addImage(fiusac,'PNG',470,10,75,75)
-        doc.text(100,620,'Ecuacion polinomial de grado 2:')
+        doc.text(100,620,'Conclusion:')
         doc.setTextColor(0,0,255)
-        doc.text(50,640,imagenmostrar.ecuacion)
+        doc.text(50,640,imagenmostrar.conclusion)
         doc.setTextColor(0,0,0)
-        doc.text(100,660,'Ultimo registro de muertes en el pais')
-        doc.setTextColor(0,0,255)
-        doc.text(200,680,imagenmostrar.mse)
-        doc.setTextColor(50,50,50)
-        doc.setTextColor(0,0,0)
-        doc.text(100,700,'Coeficiente de determinacion(R^2):')
-        doc.setTextColor(0,0,255)
-        doc.text(200,720,imagenmostrar.r_cuadrado)
         doc.setTextColor(50,50,50)
         doc.setFont('Comic Sans','italic')
         doc.setFontSize('13')
