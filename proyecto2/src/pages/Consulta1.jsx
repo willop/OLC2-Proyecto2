@@ -49,7 +49,7 @@ const Consulta1 = (props) => {
                 },
                 body: JSON.stringify(datos)
             }
-            let respuesta = await fetch('http://localhost:4000/consulta1', configuracion)
+            let respuesta = await fetch('http://34.139.88.235:4000/consulta1', configuracion)
             let json = await respuesta.json();
             console.log('valor de la respuesta json')
             console.log(json)

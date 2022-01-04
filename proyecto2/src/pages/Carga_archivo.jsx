@@ -24,7 +24,7 @@ export class Carga_archivo extends Component {
                 },
                 body: formdata
             }
-            let respuesta = await fetch('http://35.196.178.34:4000/cargamasiva',configuracion)
+            let respuesta = await fetch('http://34.139.88.235:4000/cargamasiva',configuracion)
             let json = await respuesta.json();
             console.log(json)
             
