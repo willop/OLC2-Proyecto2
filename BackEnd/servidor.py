@@ -50,7 +50,8 @@ def cargamasiva():
     if extensionarchivo == "json":
         print("es un json")
         archivoglobal = pd.read_json(archivoglobal)
-        archivoglobal = pd.replace({"":0," ":0})
+        archivoglobal = pd.DataFrame(archivoglobal)
+        archivoglobal = archivoglobal.replace({"":0," ":0})
     elif extensionarchivo=="csv":
         print("es un csv")
         archivoglobal = pd.read_csv(archivoglobal)
