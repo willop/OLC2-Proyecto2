@@ -15,7 +15,8 @@ const Consulta11 = (props) => {
         img: logo,
         porcentaje: '100%',
         total:'1000',
-        hombres:'235'
+        hombres:'235',
+        conclusion: '',
         
     })
     
@@ -25,8 +26,8 @@ const Consulta11 = (props) => {
         varpais: '',
         variable1: '',
         variable2: '',
-        vargenero:'',
-        namegenero:'',
+        vargenero: '',
+        namegenero: '',
     })
     const handleuserchange = (event) =>{
         setDatos({...datos,[event.target.name]: event.target.value})
@@ -62,8 +63,7 @@ const Consulta11 = (props) => {
             console.log(imagenmostrar.mse)
 
             imagenmostrar.hombres = json.hombres
-                      
-            
+            imagenmostrar.hombres > 50 ?  imagenmostrar.conclusion = 'Se puede evidenciar que la cantidad de hombres infectados no supera\nla mitad de la poblacion infectada, por tanto se recomienda encocarse\nmas en la poblacion de hombres y brindarme una mayor seguridad frente\nal virus.': 'Se puede evidenciar que la cantidad de hombres infectados no supera\nla mitad de la poblacion infectada, por tanto se recomienda encocarse\nmas en la demas poblacion y brindarme una mayor seguridad frente al\nvirus.'
             //console.log(imagenmostrar.pendiente)
         } catch (error) {
 
@@ -93,6 +93,10 @@ const Consulta11 = (props) => {
         doc.text(100,700,'Porcentaje de hombres:')
         doc.setTextColor(0,0,255)
         doc.text(200,720,imagenmostrar.porcentaje)
+        doc.setTextColor(0,0,0)
+        doc.text(100,740,'Conclusion')
+        doc.setTextColor(0,0,255)
+        doc.text(200,680,imagenmostrar.conclusion)
         doc.setTextColor(50,50,50)
         doc.setFont('Comic Sans','italic')
         doc.setFontSize('13')

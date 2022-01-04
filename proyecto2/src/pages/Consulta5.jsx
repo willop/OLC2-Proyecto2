@@ -133,9 +133,9 @@ const Consulta5 = (props) => {
             <div id="ID_consulta">
                 <center><h2>Predicción de mortalidad por COVID en un Departamento.</h2></center>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Ingrese la columna de los departamentos</Form.Label>
+                    <Form.Label>Ingrese la columna de los Paises</Form.Label>
                     <Form.Control name="varcolpais" type="text" placeholder="Ingrese la columna de los departamentos"  onChange={handleuserchange}/>
-                    <Form.Label>Ingrese el nombre del departamento</Form.Label>
+                    <Form.Label>Ingrese el nombre del pais</Form.Label>
                     <Form.Control name="varpais" type="text" placeholder="Ingrese el nombre del departamento"  onChange={handleuserchange}/>
                     <Form.Label>Ingrese la columna de fechas</Form.Label>
                     <Form.Control name="variable1" type="text" placeholder="Ingrese la columna de fechas"  onChange={handleuserchange}/>

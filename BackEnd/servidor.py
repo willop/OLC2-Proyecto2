@@ -993,7 +993,7 @@ def consulta8():
         print('r cuadrado')
         print(r_cuadrado)
 
-        nuevo_x = np.arange(primerdato,cantidadmas,1)  #ACA CREO MI NUEVO X                          #lo convierto
+        nuevo_x = np.arange(primerdato,varcant,1)  #ACA CREO MI NUEVO X                          #lo convierto
         print(nuevo_x)
         print("tamanio"+str(nuevo_x.size))
 
@@ -1724,7 +1724,15 @@ def consulta18():
     x = df[var1]
     y = df[var2]
     
-    print(df)
+    plt.bar(x,y,color ='orange',linestyle="-", label="Muertes")
+    plt.title('Tasa de comportamiento de casos activos en relacion al numero\nde muertes en el continente ' +varpais)
+    plt.xlabel(var1)
+    plt.ylabel(var2)
+    plt.savefig('./reporte.png')
+    with open("./reporte.png","rb") as img_file:
+        imagenbase64=base64.b64encode(img_file.read())
+        imagenbase64=imagenbase64.decode('utf-8')
+    plt.close()
     return jsonify({"img": imagenbase64})
 
 @app.route('/consulta19', methods=['POST'])
@@ -2080,7 +2088,6 @@ def consulta22():
 
     tasa = str(round(tablaresultado.mean(),2))
     return jsonify({"img":imagenbase64, "tasa":tasa})
-
 
 @app.route('/consulta23', methods=['POST'])
 def consulta23():
