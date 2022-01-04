@@ -18,10 +18,8 @@ const Reporte7=({contenido}) => {
                     <p>
                        Ecuacion del modelo de regresion lineal:<br/>
                        {contenido.ecuacion}<br/>
-                       Coeficiente de determinacion(R^2):<br/>
-                       {contenido.val_r_cuadrado}<br/>
-                       5 Aproximaciones posteriores utilizando la ecuacion:<br/>
-                       {contenido.aproximaciones}<br/>
+                       Cantidad de muertes aproximadas:<br/>
+                       {contenido.cantidadmuertes}<br/>
                     </p>
                     <div>
                     <br/>

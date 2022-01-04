@@ -85,8 +85,8 @@ def consulta1():
     if varpais == "null" or varcolpais == "null":
         print('El archivo viene sin pais')
         df = pd.DataFrame(archivoglobal)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
 
         intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
         intxx = intxx[:,np.newaxis]  
@@ -121,8 +121,8 @@ def consulta1():
         print('Filtremos el pais')
         newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
         df = pd.DataFrame(newdata)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
 
         intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
         intxx = intxx[:,np.newaxis]  
@@ -188,8 +188,8 @@ def consulta2():
     if varpais == "null" or varcolpais == "null":
         print('El archivo viene sin pais')
         df = pd.DataFrame(archivoglobal)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
 
         intxx=np.arange(0,x.size,1)
         #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -243,8 +243,8 @@ def consulta2():
         print('Filtremos el pais')
         newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
         df = pd.DataFrame(newdata)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
         
         intxx=np.arange(0,x.size,1)
         #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -323,8 +323,8 @@ def consulta3():
     if varpais == "null" or varcolpais == "null":
         print('El archivo viene sin pais')
         df = pd.DataFrame(archivoglobal)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
         regr = linear_model.LinearRegression()
 
         intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -361,8 +361,8 @@ def consulta3():
         print('Filtremos el pais')
         newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
         df = pd.DataFrame(newdata)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
         regr = linear_model.LinearRegression()      #instacio la regresion
 
         
@@ -433,8 +433,8 @@ def consulta4():
     if varpais == "null" or varcolpais == "null":
         print('El archivo viene sin pais')
         df = pd.DataFrame(archivoglobal)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
 
         intxx=np.arange(0,x.size,1)
         #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -488,8 +488,8 @@ def consulta4():
         print('Filtremos el pais')
         newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
         df = pd.DataFrame(newdata)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
         
         intxx=np.arange(0,x.size,1)
         #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -571,8 +571,8 @@ def consulta5():
     if varpais == "null" or varcolpais == "null":
         print('El archivo viene sin pais')
         df = pd.DataFrame(archivoglobal)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
 
         intxx=np.arange(0,x.size,1)
         #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -625,8 +625,8 @@ def consulta5():
         print('Filtremos el pais')
         newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
         df = pd.DataFrame(newdata)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
         
         intxx=np.arange(0,x.size,1)
         #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -705,8 +705,8 @@ def consulta6():
     if varpais == "null" or varcolpais == "null":
         print('El archivo viene sin pais')
         df = pd.DataFrame(archivoglobal)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
 
         intxx=np.arange(0,x.size,1)
         #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -750,8 +750,8 @@ def consulta6():
         print('Filtremos el pais')
         newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
         df = pd.DataFrame(newdata)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
         
         intxx=np.arange(0,x.size,1)
         #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -823,8 +823,8 @@ def consulta7():
     if varpais == "null" or varcolpais == "null":
         print('El archivo viene sin pais')
         df = pd.DataFrame(archivoglobal)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
 
         intxx=np.arange(0,x.size,1)
         #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -869,8 +869,8 @@ def consulta7():
         print('Filtremos el pais')
         newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
         df = pd.DataFrame(newdata)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
         
         intxx=np.arange(0,x.size,1)
         #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -962,8 +962,8 @@ def consulta8():
     if varpais == "null" or varcolpais == "null":
         print('El archivo viene sin pais')
         df = pd.DataFrame(archivoglobal)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
         
         varcant = x.size + 365
 
@@ -1015,8 +1015,8 @@ def consulta8():
         print('Filtremos el pais')
         newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
         df = pd.DataFrame(newdata)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
         
         varcant = x.size + 365
         intxx=np.arange(0,x.size,1)
@@ -1096,8 +1096,8 @@ def consulta9():
     if varpais == "null" or varcolpais == "null":
         print('El archivo viene sin pais')
         df = pd.DataFrame(archivoglobal)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
 
         intxx=np.arange(0,x.size,1)
         #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -1142,8 +1142,8 @@ def consulta9():
         print('Filtremos el pais')
         newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
         df = pd.DataFrame(newdata)
-        x = df[var1]
-        y = df[var2]
+        x = df[var1].fillna(0)
+        y = df[var2].fillna(0)
         
         intxx=np.arange(0,x.size,1)
         #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -1235,8 +1235,8 @@ def consulta10():
     print('Filtremos el pais')
     newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
     df = pd.DataFrame(newdata)
-    x = df[var1]
-    y = df[var2]
+    x = df[var1].fillna(0)
+    y = df[var2].fillna(0)
     
     intxx=np.arange(0,x.size,1)
     #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -1276,8 +1276,8 @@ def consulta10():
     print(archivoglobal2)
     newdata2 = archivoglobal2.loc[archivoglobal2[varcolpais]==varpais2,:]
     df2 = pd.DataFrame(newdata2)
-    x2 = df2[var3]
-    y2 = df2[var4]
+    x2 = df2[var3].fillna(0)
+    y2 = df2[var4].fillna(0)
     
     intxx2=np.arange(0,x2.size,1)
     #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -1361,8 +1361,8 @@ def consulta11():
     print('Filtremos el pais')
     newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
     dff = pd.DataFrame(newdata)
-    auxx = dff[var1]
-    auxy = dff[var2]
+    auxx = dff[var1].fillna(0)
+    auxy = dff[var2].fillna(0)
     
     newdata2 = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
     newdata2 = newdata2.loc[archivoglobal[var3]==name,:]
@@ -1426,9 +1426,9 @@ def consulta13():
     print('Filtremos el pais')
     newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
     dff = pd.DataFrame(newdata)
-    auxx = dff[var2]
-    auxy = dff[var1]
-    x = dff[var3]
+    auxx = dff[var2].fillna(0)
+    auxy = dff[var1].fillna(0)
+    x = dff[var3].fillna(0)
  
 
     plt.scatter(auxx, auxy,color ='green')
@@ -1482,8 +1482,8 @@ def consulta14():
     dff = df.groupby([var1]).sum().reset_index()
     
     print(dff)
-    x = dff[var1]
-    y = dff[var2]
+    x = dff[var1].fillna(0)
+    y = dff[var2].fillna(0)
 
     plt.bar(x, y,color ='blue',linestyle="-", label="Muertes")
     plt.title('Muertes segun la region de ' +varpais)
@@ -1528,8 +1528,8 @@ def consulta15():
     newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
     newdata = newdata.loc[archivoglobal[varcoldep]==vardep,:]
     df = pd.DataFrame(newdata)
-    x = df[var1]
-    y = df[var2]
+    x = df[var1].fillna(0)
+    y = df[var2].fillna(0)
     
     intxx=np.arange(0,x.size,1)
     #intxx = pd.to_datetime(x).astype(np.int64)   #CONVIERTO DE FECHAS A INT
@@ -1612,15 +1612,15 @@ def consulta16():
     print('Filtremos el pais')
     newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
     dff = pd.DataFrame(newdata)
-    auxx = dff[var1]
-    auxy = dff[var2]
+    auxx = dff[var1].fillna(0)
+    auxy = dff[var2].fillna(0)
     
     newdata2 = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
     newdata2 = newdata2.loc[archivoglobal[var3]==name,:]
 
     df = pd.DataFrame(newdata2)
-    x = df[var1]
-    y = df[var2]
+    x = df[var1].fillna(0)
+    y = df[var2].fillna(0)
     varcant = 0
 
     for a in y:
@@ -1669,12 +1669,12 @@ def consulta17():
     newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]    
     df = pd.DataFrame(newdata)
 
-    tablamuertes = df[var2]
-    tablainfectados = df[var3]
+    tablamuertes = df[var2].fillna(0)
+    tablainfectados = df[var3].fillna(0)
 
     tablaresultado = tablamuertes/tablainfectados
 
-    x = df[var1]
+    x = df[var1].fillna(0)
 
     plt.plot(x, tablaresultado,color ='blue',linestyle="-", label="Muertes")
     plt.title('Tasa de comportamiento de casos activos en relacion al numero\nde muertes en el continente ' +varpais)
@@ -1721,8 +1721,8 @@ def consulta18():
     newdata = newdata.loc[archivoglobal[varcolmuni]==varmuni,:]
     
     df = pd.DataFrame(newdata)
-    x = df[var1]
-    y = df[var2]
+    x = df[var1].fillna(0)
+    y = df[var2].fillna(0)
     
     plt.scatter(x,y,color ='orange',linestyle="-", label="Muertes")
     plt.title('Tasa de comportamiento de casos activos en relacion al numero\nde muertes en el continente ' +varpais)
@@ -1763,8 +1763,8 @@ def consulta19():
     print('Filtremos el pais')
     newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
     df = pd.DataFrame(newdata)
-    x = df[var1]
-    y = df[var2]
+    x = df[var1].fillna(0)
+    y = df[var2].fillna(0)
     
     varcant = x.size + 365
     intxx=np.arange(0,x.size,1)
@@ -1846,11 +1846,11 @@ def consulta20():
         print('Filtremos el continente')       
         df = pd.DataFrame(archivoglobal)
 
-        tablainfecdiarios = df[var3]
-        tablainfectados = df[var1]
+        tablainfecdiarios = df[var3].fillna(0)
+        tablainfectados = df[var1].fillna(0)
 
         tablaresultado = tablainfecdiarios/tablainfectados *100
-        x = df[var1]
+        x = df[var1].fillna(0)
 
         plt.plot(x, tablaresultado,color ='blue',linestyle="-", label="Muertes")
         plt.title('Tasa de crecimiento de casos de COVID-19 en relación con nuevos casos\ndiarios en ' +varpais)
@@ -1862,7 +1862,7 @@ def consulta20():
             imagenbase64=imagenbase64.decode('utf-8')
         plt.close()
 
-        tablamuertes = df[var2]
+        tablamuertes = df[var2].fillna(0)
         tablaresultado2 = tablamuertes/tablainfectados*100
         print(tablaresultado2)
         plt.plot(x, tablaresultado2,color ='red',linestyle="-", label="Muertes")
@@ -1880,11 +1880,11 @@ def consulta20():
         newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]    
         df = pd.DataFrame(newdata)
 
-        tablainfecdiarios = df[var3]
-        tablainfectados = df[var1]
+        tablainfecdiarios = df[var3].fillna(0)
+        tablainfectados = df[var1].fillna(0)
 
         tablaresultado = tablainfecdiarios/tablainfectados *100
-        x = df[var1]
+        x = df[var1].fillna(0)
 
         plt.plot(x, tablaresultado,color ='blue',linestyle="-", label="Muertes")
         plt.title('Tasa de crecimiento de casos de COVID-19 en relación con nuevos casos\ndiarios en ' +varpais)
@@ -1896,7 +1896,7 @@ def consulta20():
             imagenbase64=imagenbase64.decode('utf-8')
         plt.close()
 
-        tablamuertes = df[var2]
+        tablamuertes = df[var2].fillna(0)
         tablaresultado2 = tablamuertes/tablainfectados*100
         print(tablaresultado2)
         plt.plot(x, tablaresultado2,color ='red',linestyle="-", label="Muertes")
@@ -1941,9 +1941,9 @@ def consulta21():
 
     print('Filtremos el pais')
     df = pd.DataFrame(archivoglobal)
-    x = df[var1]
-    y = df[var2]
-    y2= df[var3]
+    x = df[var1].fillna(0)
+    y = df[var2].fillna(0)
+    y2= df[var3].fillna(0)
     
     varcant =  int(cant)
     intxx=np.arange(0,x.size,1)
@@ -2069,12 +2069,12 @@ def consulta22():
     newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]    
     df = pd.DataFrame(newdata)
 
-    tablamuertes = df[var2]
-    tablainfectados = df[var3]
+    tablamuertes = df[var2].fillna(0)
+    tablainfectados = df[var3].fillna(0)
 
     tablaresultado = tablamuertes/tablainfectados
 
-    x = df[var1]
+    x = df[var1].fillna(0)
 
     plt.plot(x, tablaresultado,color ='red',linestyle="-", label="Muertes")
     plt.title('Tasa de mortalidad por coronavirus (COVID-19) en el pais ' +varpais)
@@ -2117,8 +2117,8 @@ def consulta23():
     dff = df.groupby([var2]).sum().reset_index()
     
     print(dff)
-    x = dff[var2]
-    y = dff[var1]
+    x = dff[var2].fillna(0)
+    y = dff[var1].fillna(0)
 
     plt.bar(x, y,color ='blue',linestyle="-", label="Muertes")
     plt.title('Factores de muerte por COVID-19 en ' +varpais)
@@ -2160,9 +2160,9 @@ def consulta24():
     df = pd.DataFrame(newdata)
     
     print(df)
-    x = df[var1]
-    y = df[var2]
-    y2 = df[var3]
+    x = df[var1].fillna(0)
+    y = df[var2].fillna(0)
+    y2 = df[var3].fillna(0)
 
     cantidadinfec=y.sum()
     cantidadvacunas =y2.sum()
@@ -2218,8 +2218,8 @@ def consulta25():
     print('Filtremos el pais')
     newdata = archivoglobal.loc[archivoglobal[varcolpais]==varpais,:]
     df = pd.DataFrame(newdata)
-    x = df[var1]
-    y = df[var2]
+    x = df[var1].fillna(0)
+    y = df[var2].fillna(0)
     
     varcant = x.size + int(cant)
     intxx=np.arange(0,x.size,1)
